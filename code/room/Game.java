@@ -7,16 +7,16 @@ public class Game
     private void createRooms ()
     {
         //declaration des variables Room
-        Room vChaudron = new Room ("au pied de l'arc en ciel");
-        Room vClairiere = new Room ("dans une grande clairiere");
-        Room vFee = new Room ("face a face avec une petite fee des bois");
-        Room vCascade = new Room ("in a computing lab");
-        Room vElfe = new Room ("face a face avec un elfe");
-        Room vPiece = new Room ("une piece est par terre");
-        Room vLutin = new Room ("face a face avec un lutin" );
-        Room vArbre = new Room ("face a face avec un arbre vivant");
-        Room vLivre = new Room ("un livre magique est devant vous");
-        Room vSorciere = new Room ("piece secrete, face a face avec un sorciere");
+        Room vChaudron = new Room ("at the foot of the rainbow");
+        Room vClairiere = new Room ("in a great clearing");
+        Room vFee = new Room ("face to face with a little fairy of the woods");
+        Room vCascade = new Room ("in front of a big water cascade");
+        Room vElfe = new Room ("face to face with a elven");
+        Room vPiece = new Room ("facing a gold coin on the floor");
+        Room vLutin = new Room ("face to face with a pixie" );
+        Room vArbre = new Room ("face to face with a living tree");
+        Room vLivre = new Room ("facing a magic book");
+        Room vSorciere = new Room ("in a secret room, face to face with a witch");
         
         //positionner les sorties
         vChaudron.setExits( null, vSorciere, null, vClairiere);
@@ -103,7 +103,9 @@ public class Game
     private void printWelcome ()
     {
         System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Dans une foret magique : vous, un farfadet, etes appelé d'urgence au pied d'un arc en ciel car des pieces d'or du chaudron ont été volées !");
+        System.out.println ("Vous devez alors traverser la foret pour tenter de retrouver les 5 pièces d'or perdu.");
+        
         System.out.println("Type 'help' if you need help.");
         System.out.println('\n');
         System.out.println("You are " + this.aCurrentRoom.getDescription());

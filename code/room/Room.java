@@ -3,7 +3,7 @@
  
 public class Room
 {
-    private String aDescription = "au pied du chaudron d'or"; 
+    private String aDescription = "at the foot of the rainbow"; 
     public Room aNorthExit = null;
     public Room aEastExit = null;
     public Room aSouthExit = null;
