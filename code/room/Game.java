@@ -9,7 +9,7 @@ public class Game
         //declaration des variables Room
         Room vChaudron = new Room ("at the foot of the rainbow");
         Room vClairiere = new Room ("in a great clearing");
-        Room vFee = new Room ("face to face with a little fairy of the woods");
+        Room vFee = new Room ("face to face with a little woods fairy");
         Room vCascade = new Room ("in front of a big water cascade");
         Room vElfe = new Room ("face to face with a elven");
         Room vPiece = new Room ("facing a gold coin on the floor");
@@ -45,39 +45,42 @@ public class Game
         String vDirection = pCommand.getSecondWord();
         Room vNextRoom = null;
         
-        if (vDirection == null)
+        vNextRoom = aCurrentRoom.getExit(vDirection);
+        
+        /* if (vDirection == null)
         {
             System.out.println("Go where ?");
             return;
         } else {   
             if (vDirection.equals("North"))
             {
-                vNextRoom = this.aCurrentRoom.aNorthExit;
+                vNextRoom = this.aCurrentRoom.getExit("North");
                 //return this.aNorthExit;
             } 
             else if (vDirection.equals("East"))
             {
-                vNextRoom = this.aCurrentRoom.aEastExit;
+                vNextRoom = this.aCurrentRoom.getExit("East");
             }
             else if (vDirection.equals("South"))
             {
-                vNextRoom = this.aCurrentRoom.aSouthExit;
+                vNextRoom = this.aCurrentRoom.getExit("South");
             }
             else if (vDirection.equals("West"))
             {
-                vNextRoom = this.aCurrentRoom.aWestExit;
+                vNextRoom = this.aCurrentRoom.getExit("West");
             } else {
                 System.out.println ("Unknown direction !");
                 return;
             }    
-        } 
+        } */
         
         if (vNextRoom == null)
         {
             System.out.println ("There is no door !");
         } else {
             this.aCurrentRoom = vNextRoom;
-            System.out.println("You are "+vNextRoom.getDescription());
+            printLocationInfo();
+            /* System.out.println("You are "+vNextRoom.getDescription());
             System.out.print("Exits : ");
             if (this.aCurrentRoom.aNorthExit != null)
             {
@@ -95,6 +98,7 @@ public class Game
             {
                 System.out.print ("West ");
             } 
+            */
         }    
     } //procedure goRoom()  
     
@@ -108,7 +112,9 @@ public class Game
         
         System.out.println("Type 'help' if you need help.");
         System.out.println('\n');
-        System.out.println("You are " + this.aCurrentRoom.getDescription());
+        
+        printLocationInfo();
+        /* System.out.println("You are " + this.aCurrentRoom.getDescription());
         System.out.print("Exits: ");
             if (this.aCurrentRoom.aNorthExit != null)
             {
@@ -126,7 +132,7 @@ public class Game
             {
                 System.out.print ("West ");
             } 
-            
+        */ 
     } //printWelcome()
     
     private void printHelp ()
@@ -187,4 +193,19 @@ public class Game
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
+    
+    private void printLocationInfo ()
+    {
+        System.out.println("You are" + aCurrentRoom.getDescription());
+        System.out.print("Exits : ");
+        if (aCurrentRoom.aNorthExit != null) 
+        { System.out.print("North");}
+        if (aCurrentRoom.aEastExit != null) 
+        { System.out.print("East");}
+        if (aCurrentRoom.aSouthExit != null) 
+        { System.out.print("South");}
+        if (aCurrentRoom.aWestExit != null) 
+        { System.out.print("West");}
+        System.out.println();
+    } //printLocationInfo()   
 } // Game

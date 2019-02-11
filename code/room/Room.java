@@ -1,5 +1,4 @@
- //a completer selon l'histoire
- 
+
  
 public class Room
 {
@@ -27,4 +26,16 @@ public class Room
         this.aWestExit = pWestExit;
     } //setExits(....)
     
+    public Room getExit (String pDirection)
+    {
+        if (pDirection.equals("North"))
+        { return this.aNorthExit; }
+        if (pDirection.equals("East"))
+        { return this.aEastExit; }
+        if (pDirection.equals("South"))
+        { return this.aSouthExit; }
+        if (pDirection.equals("West"))
+        { return this.aWestExit; }
+        return null;
+    } //getExit(.)
 }// Room
