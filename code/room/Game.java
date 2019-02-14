@@ -7,28 +7,41 @@ public class Game
     private void createRooms ()
     {
         //declaration des variables Room
-        Room vChaudron = new Room ("at the foot of the rainbow");
-        Room vClairiere = new Room ("in a great clearing");
-        Room vFee = new Room ("face to face with a little woods fairy");
-        Room vCascade = new Room ("in front of a big water cascade");
-        Room vElfe = new Room ("face to face with a elven");
-        Room vPiece = new Room ("facing a gold coin on the floor");
-        Room vLutin = new Room ("face to face with a pixie" );
-        Room vArbre = new Room ("face to face with a living tree");
-        Room vLivre = new Room ("facing a magic book");
-        Room vSorciere = new Room ("in a secret room, face to face with a witch");
+        Room vChaudron = new Room (" at the foot of the rainbow");
+        Room vClairiere = new Room (" in a great clearing");
+        Room vFee = new Room (" face to face with a little woods fairy");
+        Room vCascade = new Room (" in front of a big water cascade");
+        Room vElfe = new Room (" face to face with a elven");
+        Room vPiece = new Room (" facing a gold coin on the floor");
+        Room vLutin = new Room (" face to face with a pixie" );
+        Room vArbre = new Room (" face to face with a living tree");
+        Room vLivre = new Room (" facing a magic book");
+        Room vSorciere = new Room (" in a secret room, face to face with a witch");
         
         //positionner les sorties
-        vChaudron.setExits( null, vSorciere, null, vClairiere);
-        vClairiere.setExits( vFee, vChaudron, vArbre, vPiece);
-        vFee.setExits( vCascade, null, vClairiere, null);
-        vCascade.setExits( null, null, vFee, vElfe);
-        vElfe.setExits( vCascade, null, vPiece, null);
-        vPiece.setExits( vElfe, vClairiere, null, vLutin);
-        vLutin.setExits( null, vPiece, null, null);
-        vArbre.setExits( vClairiere, vLivre, null, null);
-        vLivre.setExits( null, null, null, vArbre);
-        vSorciere.setExits( null, null, null, vChaudron);
+        // avant : vChaudron.setExits( null, vSorciere, null, vClairiere)
+        
+        vChaudron.setExits ("East", vSorciere);
+        vChaudron.setExits ("West", vClairiere);
+        vClairiere.setExits ("North", vFee);
+        vClairiere.setExits ("East", vChaudron);
+        vClairiere.setExits ("South", vArbre);
+        vClairiere.setExits ("West", vPiece);
+        vFee.setExits ("North", vCascade);
+        vFee.setExits ("South", vClairiere);
+        vCascade.setExits ("South", vFee);
+        vCascade.setExits ("West", vElfe);
+        vElfe.setExits ("North", vCascade);
+        vElfe.setExits ("South", vPiece);
+        vPiece.setExits ("North", vElfe);
+        vPiece.setExits ("East", vClairiere);
+        vPiece.setExits ("West", vLutin);
+        vLutin.setExits ("East", vPiece);
+        vArbre.setExits ("North", vClairiere);
+        vArbre.setExits ("East", vLivre);
+        vLivre.setExits ("West", vArbre);
+        vSorciere.setExits ("West", vChaudron);
+        
          
         //initialiser le lieu de depart
         this.aCurrentRoom = vChaudron;
@@ -198,14 +211,15 @@ public class Game
     {
         System.out.println("You are" + aCurrentRoom.getDescription());
         System.out.print("Exits : ");
-        if (aCurrentRoom.aNorthExit != null) 
+        /*if (aCurrentRoom.aNorthExit != null) 
         { System.out.print("North");}
         if (aCurrentRoom.aEastExit != null) 
         { System.out.print("East");}
         if (aCurrentRoom.aSouthExit != null) 
         { System.out.print("South");}
         if (aCurrentRoom.aWestExit != null) 
-        { System.out.print("West");}
+        { System.out.print("West");} */
+        System.out.println(aCurrentRoom.getExitString());
         System.out.println();
     } //printLocationInfo()   
 } // Game
