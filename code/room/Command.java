@@ -1,5 +1,11 @@
 
-
+/**
+ * Project Zuul
+ * Class for capture words
+ * 
+ * @autor Manon HERMANN
+ * @version v1
+ */
 public class Command
 {
     private String aCommandWord;
