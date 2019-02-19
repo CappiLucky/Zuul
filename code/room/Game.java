@@ -154,8 +154,9 @@ public class Game
 
         System.out.println("Type 'help' if you need help.");
         System.out.println('\n');
-
-        printLocationInfo();
+            
+        System.out.println(aCurrentRoom.getLongDescription());
+        //printLocationInfo();
         /* System.out.println("You are " + this.aCurrentRoom.getDescription());
         System.out.print("Exits: ");
         if (this.aCurrentRoom.aNorthExit != null)
