@@ -189,7 +189,7 @@ public class Game
         System.out.println("You can refer to the map");
         System.out.println('\n');
         System.out.println("Your command words are:");
-        System.out.println("  go quit help");
+        aParser.showCommands();
     } //printHelp()
 
     /**
@@ -239,6 +239,16 @@ public class Game
         {
             return quit(pCommand);
         } 
+        else if (commandWord.equals("look"))
+        {
+            look();
+            return false;
+        }
+        else if (commandWord.equals("eat"))
+        {
+            eat();
+            return false;
+        }
         else return false;
     } //processCommand(.)
 
@@ -269,7 +279,8 @@ public class Game
      */
     private void printLocationInfo ()
     {
-        System.out.println("You are" + aCurrentRoom.getDescription());
+        System.out.println (this.aCurrentRoom.getLongDescription());
+        //System.out.println("You are" + aCurrentRoom.getDescription());
         // System.out.print("Exits : ");
         /*if (aCurrentRoom.aNorthExit != null) 
         { System.out.print("North");}
@@ -279,7 +290,17 @@ public class Game
         { System.out.print("South");}
         if (aCurrentRoom.aWestExit != null) 
         { System.out.print("West");} */
-        System.out.println(aCurrentRoom.getExitString());
+        // System.out.println(aCurrentRoom.getExitString());
         System.out.println();
     } //printLocationInfo()   
+
+    private void look () 
+    {
+        System.out.println (aCurrentRoom.getLongDescription());
+    } //look()
+    
+    private void eat ()
+    {
+        System.out.println ("You have eaten now and you are not hungry any more.");
+    } //eat()
 } // Game

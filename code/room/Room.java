@@ -104,4 +104,17 @@ public class Room
         if (this.aWestExit != null) vExits += " West"; 
         return vExits; */
     } //getExitString()
+    
+    //exo 7.11
+    /**
+     * Return a long description of this room, of the form :
+     *      You are in the kitchen.
+     *      Exits : North West
+     *      
+     * @return A description of the room, including exits     
+     */
+    public String getLongDescription()
+    {
+        return ("You are " + this.aDescription + ".\n" + getExitString());
+    } //getLongDescription()
 }// Room

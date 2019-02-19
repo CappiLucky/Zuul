@@ -16,7 +16,7 @@ public class CommandWords
 {
     // tableau constant qui contient tous les mots de commande valides
     private static final String[] sValidCommands = {
-        "go", "quit", "help"
+        "go", "quit", "help", "look", "eat"
     };
 
     /**
@@ -26,7 +26,7 @@ public class CommandWords
     {
         // rien a faire pour le moment...
     } // CommandWords()
-
+    
     /**
      * Verifie si une String donnee fait partie des commandes valides. 
      * @param pString la String a tester
@@ -44,4 +44,13 @@ public class CommandWords
         // n'a pas ete trouvee dans le tableau
         return false;
     } // isCommand()
+    
+    public void showAll ()
+    {
+        for (String command : sValidCommands) 
+        {
+            System.out.print (command + ' ');
+        }
+        System.out.println();
+    } //showAll
 } // CommandWords
