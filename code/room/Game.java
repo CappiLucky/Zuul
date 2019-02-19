@@ -257,7 +257,7 @@ public class Game
         {
             vCommand = this.aParser.getCommand();
             vFinished = this.processCommand(vCommand);
-        }
+        } 
         System.out.println("Thank you for playing.  Good bye.");
     }
 
