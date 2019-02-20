@@ -45,12 +45,18 @@ public class CommandWords
         return false;
     } // isCommand()
     
-    public void showAll ()
+    public String getCommandList () //anciennement showAll
     {
-        for (String command : sValidCommands) 
+        /*for (String command : sValidCommands) 
         {
             System.out.print (command + ' ');
         }
-        System.out.println();
+        System.out.println(); */
+        String vCommand ="";
+        for (String command : sValidCommands)
+        {
+            vCommand += command + ' ';
+        }
+        return vCommand;
     } //showAll
 } // CommandWords

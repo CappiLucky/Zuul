@@ -10,10 +10,6 @@ import java.util.Iterator;
  */
 public class Room
 {
-    /* public Room aNorthExit = null;
-    public Room aEastExit = null;
-    public Room aSouthExit = null;
-    public Room aWestExit = null; */
     public HashMap <String, Room> aExitHM;
     private String aDescription = "at the foot of the rainbow"; 
 
@@ -53,11 +49,7 @@ public class Room
      */
     public void setExits (final String pDirection, final Room pRoom /* final Room pNorthExit, final Room pEastExit, final Room pSouthExit, final Room pWestExit*/)
     {
-        aExitHM.put(pDirection, pRoom); 
-        /* this.aNorthExit = pNorthExit;
-        this.aEastExit = pEastExit;
-        this.aSouthExit = pSouthExit;
-        this.aWestExit = pWestExit; */ 
+        aExitHM.put(pDirection, pRoom);
     } //setExits(....)
 
     /**
@@ -70,15 +62,6 @@ public class Room
     public Room getExit (String pDirection)
     {
         return aExitHM.get(pDirection);
-        /*if (pDirection.equals("North"))
-        { return this.aNorthExit; }
-        if (pDirection.equals("East"))
-        { return this.aEastExit; }
-        if (pDirection.equals("South"))
-        { return this.aSouthExit; }
-        if (pDirection.equals("West"))
-        { return this.aWestExit; }
-        return null; */
     } //getExit(.)
 
     /**
@@ -90,7 +73,6 @@ public class Room
      */
     public String getExitString() 
     {
-        // String vExits = "";
         String vExit = "Exits : ";
         Set<String> keys = aExitHM.keySet();
         for (String aExitHM : keys ) 
@@ -98,11 +80,6 @@ public class Room
             vExit += ' ' + aExitHM; 
         }
         return vExit; 
-        /* if (this.aNorthExit != null) vExits += " North";
-        if (this.aEastExit != null) vExits += " East";
-        if (this.aSouthExit != null) vExits += " South";
-        if (this.aWestExit != null) vExits += " West"; 
-        return vExits; */
     } //getExitString()
     
     //exo 7.11

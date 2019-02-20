@@ -68,8 +68,8 @@ public class Parser
         }
     } // getCommand()
     
-    public void showCommands ()
+    public String showCommands ()
     {
-        aValidCommands.showAll();
+        return aValidCommands.getCommandList();
     } //showCommands
 } // Parser

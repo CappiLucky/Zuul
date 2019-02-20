@@ -32,7 +32,6 @@ public class Game
         Room vSorciere = new Room (" in a secret room, face to face with a witch");
 
         //positionner les sorties
-        // avant : vChaudron.setExits( null, vSorciere, null, vClairiere)
         vChaudron.setExits ("East", vSorciere);
         vChaudron.setExits ("West", vClairiere);
         vClairiere.setExits ("North", vFee);
@@ -80,35 +79,7 @@ public class Game
     {
         String vDirection = pCommand.getSecondWord();
         Room vNextRoom = null;
-
         vNextRoom = aCurrentRoom.getExit(vDirection);
-
-        /* if (vDirection == null)
-        {
-        System.out.println("Go where ?");
-        return;
-        } else {   
-        if (vDirection.equals("North"))
-        {
-        vNextRoom = this.aCurrentRoom.getExit("North");
-        //return this.aNorthExit;
-        } 
-        else if (vDirection.equals("East"))
-        {
-        vNextRoom = this.aCurrentRoom.getExit("East");
-        }
-        else if (vDirection.equals("South"))
-        {
-        vNextRoom = this.aCurrentRoom.getExit("South");
-        }
-        else if (vDirection.equals("West"))
-        {
-        vNextRoom = this.aCurrentRoom.getExit("West");
-        } else {
-        System.out.println ("Unknown direction !");
-        return;
-        }    
-        } */
 
         if (vNextRoom == null)
         {
@@ -116,29 +87,8 @@ public class Game
         } else {
             this.aCurrentRoom = vNextRoom;
             printLocationInfo();
-            /* System.out.println("You are "+vNextRoom.getDescription());
-            System.out.print("Exits : ");
-            if (this.aCurrentRoom.aNorthExit != null)
-            {
-            System.out.print ("North ");
-            }    
-            if (this.aCurrentRoom.aEastExit != null)
-            {
-            System.out.print ("East ");
-            } 
-            if (this.aCurrentRoom.aSouthExit != null)
-            {
-            System.out.print ("South ");
-            } 
-            if (this.aCurrentRoom.aWestExit != null)
-            {
-            System.out.print ("West ");
-            } 
-             */
         }    
-    } //procedure goRoom()  
-
-    // ## debut tp3.2##
+    } //procedure goRoom() 
 
     /**
      * The welcome text when you start a new game 
@@ -156,26 +106,6 @@ public class Game
         System.out.println('\n');
             
         System.out.println(aCurrentRoom.getLongDescription());
-        //printLocationInfo();
-        /* System.out.println("You are " + this.aCurrentRoom.getDescription());
-        System.out.print("Exits: ");
-        if (this.aCurrentRoom.aNorthExit != null)
-        {
-        System.out.print ("North ");
-        }    
-        if (this.aCurrentRoom.aEastExit != null)
-        {
-        System.out.print ("East ");
-        } 
-        if (this.aCurrentRoom.aSouthExit != null)
-        {
-        System.out.print ("South ");
-        } 
-        if (this.aCurrentRoom.aWestExit != null)
-        {
-        System.out.print ("West ");
-        } 
-         */ 
     } //printWelcome()
 
     /**
@@ -188,9 +118,9 @@ public class Game
     {
         System.out.println("You are lost.");
         System.out.println("You can refer to the map");
-        System.out.println('\n');
+        System.out.println();
         System.out.println("Your command words are:");
-        aParser.showCommands();
+        System.out.println( aParser.showCommands());
     } //printHelp()
 
     /**
@@ -281,17 +211,6 @@ public class Game
     private void printLocationInfo ()
     {
         System.out.println (this.aCurrentRoom.getLongDescription());
-        //System.out.println("You are" + aCurrentRoom.getDescription());
-        // System.out.print("Exits : ");
-        /*if (aCurrentRoom.aNorthExit != null) 
-        { System.out.print("North");}
-        if (aCurrentRoom.aEastExit != null) 
-        { System.out.print("East");}
-        if (aCurrentRoom.aSouthExit != null) 
-        { System.out.print("South");}
-        if (aCurrentRoom.aWestExit != null) 
-        { System.out.print("West");} */
-        // System.out.println(aCurrentRoom.getExitString());
         System.out.println();
     } //printLocationInfo()   
 
