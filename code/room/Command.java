@@ -3,7 +3,7 @@
  * Project Zuul
  * Class for capture words
  * 
- * @autor Manon HERMANN
+ * @author Manon HERMANN
  * @version v1
  */
 public class Command

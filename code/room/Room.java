@@ -5,7 +5,7 @@ import java.util.Iterator;
  * Project Zuul
  * Class for make action on room
  * 
- * @autor Manon HERMANN
+ * @author Manon HERMANN
  * @version v1
  */
 public class Room
@@ -19,7 +19,6 @@ public class Room
      * "pDescription" is something like "a forest"
      * 
      * @param pDescription The description of the room
-     * @return Nothing
      */
     public Room (final String pDescription) 
     {
@@ -28,11 +27,8 @@ public class Room
     } //Room(.)
 
     /**
-     * Return a String description of the room
+     * @return aDescription a String description of the room
      * (the one that was defined in the constructor)
-     * 
-     * @param Nothing No parameters required
-     * @return Nothing
      */
     public String getDescription ()
     {
@@ -45,7 +41,6 @@ public class Room
      * 
      * @param pDirection The direction where do you want to go
      * @param pRoom The room where you go
-     * @return Nothing
      */
     public void setExits (final String pDirection, final Room pRoom /* final Room pNorthExit, final Room pEastExit, final Room pSouthExit, final Room pWestExit*/)
     {
@@ -68,7 +63,6 @@ public class Room
      * Return a description of the room's exits,
      * for example "exits : North, West"
      * 
-     * @param Nothing No parameters required
      * @return The exit available
      */
     public String getExitString() 
