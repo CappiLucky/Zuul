@@ -11,7 +11,8 @@ import java.util.Iterator;
 public class Room
 {
     public HashMap <String, Room> aExitHM;
-    private String aDescription = "at the foot of the rainbow"; 
+    private String aDescription; 
+    private String aImageName;
 
     /**
      * Create a room described by "pDescription".
@@ -20,11 +21,12 @@ public class Room
      * 
      * @param pDescription The description of the room
      */
-    public Room (final String pDescription) 
+    public Room (final String pDescription, String pImage) 
     {
         this.aDescription = pDescription;
         aExitHM = new HashMap <String, Room> ();
-    } //Room(.)
+        aImageName = pImage;
+    } //Room(..)
 
     /**
      * @return aDescription a String description of the room
@@ -35,6 +37,18 @@ public class Room
         return this.aDescription;
     }   
 
+    /**
+     * Return a long description of this room, of the form :
+     *      You are in the kitchen.
+     *      Exits : North West
+     *      
+     * @return A description of the room, including exits     
+     */
+    public String getLongDescription()
+    {
+        return ("You are " + this.aDescription + ".\n" + getExitString());
+    } //getLongDescription()
+    
     /**
      * Define the exits of the room.
      * Every direction either leads to another room or is null (no exit there)
@@ -76,16 +90,11 @@ public class Room
         return vExit; 
     } //getExitString()
     
-    //exo 7.11
     /**
-     * Return a long description of this room, of the form :
-     *      You are in the kitchen.
-     *      Exits : North West
-     *      
-     * @return A description of the room, including exits     
+     * Return a string describing the room's image name
      */
-    public String getLongDescription()
+    public String getImageName() 
     {
-        return ("You are " + this.aDescription + ".\n" + getExitString());
-    } //getLongDescription()
+        return aImageName;
+    } 
 }// Room

@@ -1,4 +1,3 @@
-
 /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.  
@@ -40,8 +39,7 @@ public class CommandWords
             if ( sValidCommands[i].equals( pString ) )
                 return true;
         } // for
-        // si nous arrivons la, c'est que la commande
-        // n'a pas ete trouvee dans le tableau
+        // si nous arrivons la, c'est que la commande n'a pas ete trouvee dans le tableau
         return false;
     } // isCommand()
     
