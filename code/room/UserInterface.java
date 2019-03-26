@@ -9,7 +9,8 @@ import java.awt.image.*;
  * area, a text output area and an optional image.
  * 
  * @author Michael Kolling (DB edited)
- * @version 1.0 (Jan 2003)
+ * @author modified by Manon HERMANN    
+ * @version 1
  */
 public class UserInterface implements ActionListener
 {
@@ -18,6 +19,8 @@ public class UserInterface implements ActionListener
     private JTextField aEntryField;
     private JTextArea  aLog;
     private JLabel     aImage;
+    private JButton    aButton;
+    private Parser     aParser;
 
     /**
      * Construct a UserInterface. As a parameter, a Game Engine
@@ -81,6 +84,8 @@ public class UserInterface implements ActionListener
     {
         this.aMyFrame = new JFrame( "Alerte au pied de l'arc en ciel" );
         this.aEntryField = new JTextField( 34 );
+        
+        this.aButton =  new JButton ("help");
 
         this.aLog = new JTextArea();
         this.aLog.setEditable( false );
@@ -95,6 +100,7 @@ public class UserInterface implements ActionListener
         vPanel.add( this.aImage, BorderLayout.NORTH );
         vPanel.add( vListScroller, BorderLayout.CENTER );
         vPanel.add( this.aEntryField, BorderLayout.SOUTH );
+        vPanel.add( this.aButton, BorderLayout.EAST);
 
         this.aMyFrame.getContentPane().add( vPanel, BorderLayout.CENTER );
 
@@ -104,6 +110,7 @@ public class UserInterface implements ActionListener
         } );
 
         this.aEntryField.addActionListener( this );
+        this.aButton.addActionListener (this);
 
         this.aMyFrame.pack();
         this.aMyFrame.setVisible( true );
@@ -117,6 +124,11 @@ public class UserInterface implements ActionListener
     {
         // no need to check the type of action at the moment.
         // there is only one possible action: text entry
+        Object vSource=pE.getSource();
+        if(vSource==aButton){
+            aEngine.interpretCommand(aParser.getCommand("help")); 
+            return;
+        }
         this.processCommand();
     } // actionPerformed(.)
 

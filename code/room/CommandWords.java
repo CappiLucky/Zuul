@@ -44,7 +44,7 @@ public class CommandWords
     } // isCommand()
     
     public String getCommandList () //anciennement showAll
-    {
+    { 
         /*for (String command : sValidCommands) 
         {
             System.out.print (command + ' ');

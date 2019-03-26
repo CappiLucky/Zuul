@@ -12,7 +12,7 @@ public class GameEngine
 {
     private Room aCurrentRoom;
     private Parser aParser;
-    private UserInterface gui;
+    private UserInterface aGui;
     
     /**
      * Constructor for objects of class GameEngine
@@ -23,9 +23,9 @@ public class GameEngine
        createRooms();
     }
     
-    public void setGUI(UserInterface userInterface)
+    public void setGUI(UserInterface pUserInterface)
     {
-        gui = userInterface;
+        aGui = pUserInterface;
         printWelcome();
     }
     
@@ -34,17 +34,17 @@ public class GameEngine
      */
     private void printWelcome ()
     {
-        gui.println("Welcome to the World of Zuul!");
-        gui.println("The game name is : Alerte au pied de l'arc en ciel");
-        gui.println("In a magical forest : you, a farfadet, are called urgently at the foot of the rainbow because gold coin from the cauldron have been stolen !");
-        gui.println ("Then, you have to cross the forest to try to find the stolen gold coin");
+        aGui.println("Welcome to the World of Zuul!");
+        aGui.println("The game name is : Alerte au pied de l'arc en ciel");
+        aGui.println("In a magical forest : you, a farfadet, are called urgently at the foot of the rainbow because gold coin from the cauldron have been stolen !");
+        aGui.println ("Then, you have to cross the forest to try to find the stolen gold coin");
 
-        gui.println("Type 'help' if you need help.");
-        gui.println("\n");
+        aGui.println("Type 'help' if you need help.");
+        aGui.println("\n");
         //gui.println(aCurrentRoom.getLongDescription());
         
-        gui.println(aCurrentRoom.getLongDescription());
-        gui.showImage(aCurrentRoom.getImageName());
+        aGui.println(aCurrentRoom.getLongDescription()); 
+        aGui.showImage(aCurrentRoom.getImageName()); 
     } //printWelcome()
     
     /**
@@ -95,13 +95,13 @@ public class GameEngine
      * If this command ends the game, true is returned, otherwise false is
      * returned.
      */
-    public void interpretCommand(String commandLine) 
+    public void interpretCommand(String pCommandLine) 
     {
-        gui.println(commandLine);
-        Command command = aParser.getCommand(commandLine);
+        aGui.println(pCommandLine);
+        Command command = aParser.getCommand(pCommandLine);
 
         if(command.isUnknown()) {
-            gui.println("I don't know what you mean...");
+            aGui.println("I don't know what you mean...");
             return;
         }
 
@@ -112,7 +112,7 @@ public class GameEngine
             goRoom(command);
         else if (commandWord.equals("quit")) {
             if(command.hasSecondWord())
-                gui.println("Quit what?");
+                aGui.println("Quit what?");
             else
                 endGame();
         } 
@@ -127,11 +127,11 @@ public class GameEngine
      */
     private void printHelp ()
     {
-        gui.println("You are lost.");
-        gui.println("You can refer to the map");
-        gui.println("\n");
-        gui.println("Your command words are:");
-        gui.println(aParser.showCommands());
+        aGui.println("You are lost.");
+        aGui.println("You can refer to the map");
+        aGui.println("\n");
+        aGui.println("Your command words are:");
+        aGui.println(aParser.showCommands());
     } //printHelp()
     
     /**
@@ -143,7 +143,7 @@ public class GameEngine
     {
         if(!pCommand.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            gui.println("Go where?");
+            aGui.println("Go where?");
             return;
         }
         
@@ -154,19 +154,19 @@ public class GameEngine
 
         if (vNextRoom == null)
         {
-            gui.println ("There is no door !");
+            aGui.println ("There is no door !");
         } else {
             this.aCurrentRoom = vNextRoom;
-            gui.println(aCurrentRoom.getLongDescription());
+            printLocationInfo();
             if (aCurrentRoom.getImageName() != null)
-                gui.showImage(aCurrentRoom.getImageName());
+                aGui.showImage(aCurrentRoom.getImageName());
         }    
     } //procedure goRoom() 
     
     private void endGame()
     {
-        gui.println("Thank you for playing.  Good bye.");
-        gui.enable(false);
+        aGui.println("Thank you for playing.  Good bye.");
+        aGui.enable(false);
     } 
     
     //autres fonctions
@@ -176,7 +176,7 @@ public class GameEngine
      */
     private void look () 
     {
-        gui.println (aCurrentRoom.getLongDescription());
+        printLocationInfo();
     } //look()
     
     /**
@@ -184,7 +184,7 @@ public class GameEngine
      */
     private void eat ()
     {
-        gui.println ("You have eaten now and you are not hungry any more.");
+        aGui.println ("You have eaten now and you are not hungry any more.");
     } //eat() 
     
     
@@ -195,8 +195,8 @@ public class GameEngine
      */
     private void printLocationInfo ()
     {
-        gui.println (this.aCurrentRoom.getLongDescription());
-        gui.println("\n");
+        aGui.println (this.aCurrentRoom.getLongDescription());
+        aGui.println("\n");
     } //printLocationInfo()  
     
     /**
@@ -210,7 +210,7 @@ public class GameEngine
         boolean vSecondWord = true;
         if(pC.getSecondWord() == null)
         {
-            gui.println("Quit what ?");
+            aGui.println("Quit what ?");
             return vSecondWord =false;
         } else 
         {return vSecondWord;
