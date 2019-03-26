@@ -1,4 +1,3 @@
-
 /**
  * Project Zuul
  * Class for initialise new game
@@ -13,9 +12,6 @@ public class Game
 
     /**
      * Create Room of the game with his descriptions and exits 
-     * 
-     * @param Nothing No parameters required
-     * @return Nothing
      */
     private void createRooms ()
     {
@@ -59,9 +55,6 @@ public class Game
 
     /**
      * Begin a new game
-     * 
-     * @param Nothing No parameters required
-     * @return Nothing
      */
     public Game() 
     {
@@ -73,7 +66,6 @@ public class Game
      * Go in the room passed in parameters
      * 
      * @param pCommand The word which has writting
-     * @return Nothing
      */
     private void goRoom (final Command pCommand)
     {
@@ -92,9 +84,6 @@ public class Game
 
     /**
      * The welcome text when you start a new game 
-     * 
-     * @param Nothing No parameters required
-     * @return Nothing
      */
     private void printWelcome ()
     {
@@ -110,9 +99,6 @@ public class Game
 
     /**
      * The help text when you write "help"
-     * 
-     * @param Nothing No parameters required
-     * @return Nothing
      */
     private void printHelp ()
     {
@@ -185,9 +171,6 @@ public class Game
 
     /**
      * The game engine
-     * 
-     * @param Nothing No parameters required
-     * @return Nothing
      */
     public void play()
     {
@@ -204,9 +187,6 @@ public class Game
 
     /**
      * When you arrived in a new room, this methode print description and exits available
-     * 
-     * @param Nothing No parameters required
-     * @return Nothing
      */
     private void printLocationInfo ()
     {
@@ -214,11 +194,17 @@ public class Game
         System.out.println();
     } //printLocationInfo()   
 
+    /**
+     * Allow you to look around you
+     */
     private void look () 
     {
         System.out.println (aCurrentRoom.getLongDescription());
     } //look()
     
+    /**
+     * Allow you to eat something
+     */
     private void eat ()
     {
         System.out.println ("You have eaten now and you are not hungry any more.");
