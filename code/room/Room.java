@@ -5,13 +5,14 @@ import java.util.Iterator;
  * Project Zuul
  * Class for make action on room
  * 
- * @autor Manon HERMANN
+ * @author Manon HERMANN
  * @version v1
  */
 public class Room
 {
     public HashMap <String, Room> aExitHM;
-    private String aDescription = "at the foot of the rainbow"; 
+    private String aDescription; 
+    private String aImageName;
 
     /**
      * Create a room described by "pDescription".
@@ -19,20 +20,17 @@ public class Room
      * "pDescription" is something like "a forest"
      * 
      * @param pDescription The description of the room
-     * @return Nothing
      */
-    public Room (final String pDescription) 
+    public Room (final String pDescription, String pImage) 
     {
         this.aDescription = pDescription;
         aExitHM = new HashMap <String, Room> ();
-    } //Room(.)
+        aImageName = pImage;
+    } //Room(..)
 
     /**
-     * Return a String description of the room
+     * @return aDescription a String description of the room
      * (the one that was defined in the constructor)
-     * 
-     * @param Nothing No parameters required
-     * @return Nothing
      */
     public String getDescription ()
     {
@@ -40,12 +38,23 @@ public class Room
     }   
 
     /**
+     * Return a long description of this room, of the form :
+     *      You are in the kitchen.
+     *      Exits : North West
+     *      
+     * @return A description of the room, including exits     
+     */
+    public String getLongDescription()
+    {
+        return ("You are " + this.aDescription + ".\n" + getExitString());
+    } //getLongDescription()
+    
+    /**
      * Define the exits of the room.
      * Every direction either leads to another room or is null (no exit there)
      * 
      * @param pDirection The direction where do you want to go
      * @param pRoom The room where you go
-     * @return Nothing
      */
     public void setExits (final String pDirection, final Room pRoom /* final Room pNorthExit, final Room pEastExit, final Room pSouthExit, final Room pWestExit*/)
     {
@@ -68,7 +77,6 @@ public class Room
      * Return a description of the room's exits,
      * for example "exits : North, West"
      * 
-     * @param Nothing No parameters required
      * @return The exit available
      */
     public String getExitString() 
@@ -82,16 +90,11 @@ public class Room
         return vExit; 
     } //getExitString()
     
-    //exo 7.11
     /**
-     * Return a long description of this room, of the form :
-     *      You are in the kitchen.
-     *      Exits : North West
-     *      
-     * @return A description of the room, including exits     
+     * Return a string describing the room's image name
      */
-    public String getLongDescription()
+    public String getImageName() 
     {
-        return ("You are " + this.aDescription + ".\n" + getExitString());
-    } //getLongDescription()
+        return aImageName;
+    } 
 }// Room

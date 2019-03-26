@@ -1,12 +1,24 @@
+<<<<<<< HEAD
+=======
+/* doit encore :
+* - faire une HashMap pour relier les rooms et les images
+* - faire un bouton
+* - deplacer les images dans un repertoire
+* - creer les items disponible dans le jeu
+* - ajouter la description des differents items
+*/
+
+>>>>>>> d2fa9cff1f6cbb177c2592c93280fa56657a9fde
 /**
  * Project Zuul
  * Class for initialise new game
  * 
- * @autor Manon HERMANN
+ * @author Manon HERMANN
  * @version v1
  */
 public class Game 
 {
+<<<<<<< HEAD
     private Room aCurrentRoom;
     private Parser aParser;
 
@@ -55,13 +67,27 @@ public class Game
 
     /**
      * Begin a new game
+=======
+    //private Room aCurrentRoom;
+    //private Parser aParser;
+    private UserInterface gui;
+    private GameEngine engine;
+ 
+    /**
+     * Begin a new game
+     * Create the game and initialise its internal map.
+>>>>>>> d2fa9cff1f6cbb177c2592c93280fa56657a9fde
      */
-    public Game() 
+    public Game() //a laisser
     {
-        createRooms();
-        this.aParser = new Parser();
+        //createRooms();
+        //this.aParser = new Parser();
+       engine = new GameEngine();
+       gui = new UserInterface(engine);
+       engine.setGUI(gui);
     } //contructeur par defaut : Game()  
 
+<<<<<<< HEAD
     /**
      * Go in the room passed in parameters
      * 
@@ -209,4 +235,6 @@ public class Game
     {
         System.out.println ("You have eaten now and you are not hungry any more.");
     } //eat()
+=======
+>>>>>>> d2fa9cff1f6cbb177c2592c93280fa56657a9fde
 } // Game
