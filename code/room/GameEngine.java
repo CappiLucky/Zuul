@@ -41,7 +41,7 @@ public class GameEngine
 
         gui.println("Type 'help' if you need help.");
         gui.println("\n");
-        //System.out.println(aCurrentRoom.getLongDescription());
+        //gui.println(aCurrentRoom.getLongDescription());
         
         gui.println(aCurrentRoom.getLongDescription());
         gui.showImage(aCurrentRoom.getImageName());
@@ -127,11 +127,11 @@ public class GameEngine
      */
     private void printHelp ()
     {
-        System.out.println("You are lost.");
-        System.out.println("You can refer to the map");
-        System.out.println();
-        System.out.println("Your command words are:");
-        System.out.println( aParser.showCommands());
+        gui.println("You are lost.");
+        gui.println("You can refer to the map");
+        gui.println("\n");
+        gui.println("Your command words are:");
+        gui.println(aParser.showCommands());
     } //printHelp()
     
     /**
@@ -176,7 +176,7 @@ public class GameEngine
      */
     private void look () 
     {
-        System.out.println (aCurrentRoom.getLongDescription());
+        gui.println (aCurrentRoom.getLongDescription());
     } //look()
     
     /**
@@ -184,7 +184,7 @@ public class GameEngine
      */
     private void eat ()
     {
-        System.out.println ("You have eaten now and you are not hungry any more.");
+        gui.println ("You have eaten now and you are not hungry any more.");
     } //eat() 
     
     
@@ -195,8 +195,8 @@ public class GameEngine
      */
     private void printLocationInfo ()
     {
-        System.out.println (this.aCurrentRoom.getLongDescription());
-        System.out.println();
+        gui.println (this.aCurrentRoom.getLongDescription());
+        gui.println("\n");
     } //printLocationInfo()  
     
     /**
@@ -210,7 +210,7 @@ public class GameEngine
         boolean vSecondWord = true;
         if(pC.getSecondWord() == null)
         {
-            System.out.println("Quit what ?");
+            gui.println("Quit what ?");
             return vSecondWord =false;
         } else 
         {return vSecondWord;

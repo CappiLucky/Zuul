@@ -79,7 +79,7 @@ public class UserInterface implements ActionListener
      */
     private void createGUI()
     {
-        this.aMyFrame = new JFrame( "Zork" );
+        this.aMyFrame = new JFrame( "Alerte au pied de l'arc en ciel" );
         this.aEntryField = new JTextField( 34 );
 
         this.aLog = new JTextArea();
