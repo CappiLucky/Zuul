@@ -82,9 +82,10 @@ public class UserInterface implements ActionListener
      */
     private void createGUI()
     {
-        this.aMyFrame = new JFrame( "Alerte au pied de l'arc en ciel" );
-        this.aEntryField = new JTextField( 34 );
+        this.aMyFrame = new JFrame( "Alerte au pied de l'arc en ciel" ); //titre de la fenetre
+        this.aEntryField = new JTextField( 34 ); //police d'ecriture
         
+        //creation bouttons :
         this.aButton =  new JButton ("help");
 
         this.aLog = new JTextArea();
@@ -95,7 +96,8 @@ public class UserInterface implements ActionListener
 
         JPanel vPanel = new JPanel();
         this.aImage = new JLabel();
-
+        
+        //disposition de la fenetre de jeu
         vPanel.setLayout( new BorderLayout() );
         vPanel.add( this.aImage, BorderLayout.NORTH );
         vPanel.add( vListScroller, BorderLayout.CENTER );
@@ -126,7 +128,7 @@ public class UserInterface implements ActionListener
         // there is only one possible action: text entry
         Object vSource=pE.getSource();
         if(vSource==aButton){
-            aEngine.interpretCommand(aParser.getCommand("help")); 
+            aEngine.interpretCommand(aParser.getCommand( help() )); 
             return;
         }
         this.processCommand();
