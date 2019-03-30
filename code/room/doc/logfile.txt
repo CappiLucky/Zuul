@@ -1,6 +1,6 @@
 Class documentation
 <---- javadoc command: ---->
-/usr/lib/jvm/java-8-openjdk/bin/javadoc
+/usr/lib/jvm/java-8-oracle/bin/javadoc
 -author
 -version
 -nodeprecated
@@ -13,14 +13,27 @@ Class documentation
 -source
 1.8
 -classpath
-/opt/bluej/bluejcore.jar:/opt/bluej/junit-4.11.jar:/opt/bluej/hamcrest-core-1.3.jar:/opt/bluej/lang-stride.jar:/opt/bluej/userlib/pi4j-service.jar:/opt/bluej/userlib/pi4j-device.jar:/opt/bluej/userlib/pi4j-core.jar:/opt/bluej/userlib/pi4j-gpio-extension.jar:/home/lucky/Bureau/IPO/Zuul/code/room
+/usr/share/bluej/bluejcore.jar:/usr/share/bluej/junit-4.11.jar:/usr/share/bluej/hamcrest-core-1.3.jar:/usr/share/bluej/lang-stride.jar:/usr/share/bluej/userlib/pi4j-device.jar:/usr/share/bluej/userlib/pi4j-gpio-extension.jar:/usr/share/bluej/userlib/pi4j-service.jar:/usr/share/bluej/userlib/pi4j-core.jar:/home/lucky/Documents/E1/IPO/Zuul/code/room
 -d
-/home/lucky/Bureau/IPO/Zuul/code/room/doc
+/home/lucky/Documents/E1/IPO/Zuul/code/room/doc
 -encoding
 UTF-8
 -charset
 UTF-8
-/home/lucky/Bureau/IPO/Zuul/code/room/Game.java
+/home/lucky/Documents/E1/IPO/Zuul/code/room/UserInterface.java
 <---- end of javadoc command ---->
-javadoc: error - Cannot find doclet class com.sun.tools.doclets.standard.Standard
-1 error
+Loading source file /home/lucky/Documents/E1/IPO/Zuul/code/room/UserInterface.java...
+Constructing Javadoc information...
+Standard Doclet version 1.8.0_201
+Building tree for all the packages and classes...
+Generating /home/lucky/Documents/E1/IPO/Zuul/code/room/doc/UserInterface.html...
+/home/lucky/Documents/E1/IPO/Zuul/code/room/UserInterface.java:32: warning - @param argument "gameEngine" is not a parameter name.
+Generating /home/lucky/Documents/E1/IPO/Zuul/code/room/doc/package-frame.html...
+Generating /home/lucky/Documents/E1/IPO/Zuul/code/room/doc/package-summary.html...
+Generating /home/lucky/Documents/E1/IPO/Zuul/code/room/doc/constant-values.html...
+Building index for all the packages and classes...
+Building index for all classes...
+Generating /home/lucky/Documents/E1/IPO/Zuul/code/room/doc/allclasses-frame.html...
+Generating /home/lucky/Documents/E1/IPO/Zuul/code/room/doc/allclasses-noframe.html...
+Generating /home/lucky/Documents/E1/IPO/Zuul/code/room/doc/index.html...
+1 warning

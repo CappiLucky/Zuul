@@ -1,7 +1,6 @@
 /* doit encore :
 * - faire une HashMap pour relier les rooms et les images
-* - faire un bouton
-* - deplacer les images dans un repertoire
+* - faire un bouton (nf)
 * - creer les items disponible dans le jeu
 * - ajouter la description des differents items
 */
