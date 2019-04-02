@@ -13,6 +13,7 @@ public class Room
     public HashMap <String, Room> aExitHM;
     private String aDescription; 
     private String aImageName;
+    private Items aItem;
 
     /**
      * Create a room described by "pDescription".
@@ -21,11 +22,12 @@ public class Room
      * 
      * @param pDescription The description of the room
      */
-    public Room (final String pDescription, String pImage) 
+    public Room (final String pDescription, final String pImage, final Items pItem) 
     {
         this.aDescription = pDescription;
         aExitHM = new HashMap <String, Room> ();
-        aImageName = pImage;
+        this.aImageName = pImage;
+        this.aItem = pItem;
     } //Room(..)
 
     /**

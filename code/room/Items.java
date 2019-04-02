@@ -20,5 +20,5 @@ public class Items
         this.aDescription = pDescr;
         this.aWeight = pWeight;
     }
-
+    
 }

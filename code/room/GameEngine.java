@@ -56,17 +56,23 @@ public class GameEngine
      */
     private void createRooms ()
     {
+        //declaration des items
+        Items vIPiece = new Items ("gold coin", 1);
+        Items vIEau = new Items ("water", 1);
+        Items vILivre = new Items ("book", 1);
+            //a finir
+        
         //declaration des variables Room
-        Room vChaudron = new Room (" at the foot of the rainbow", "images/chaudron_dor2.jpg");
-        Room vClairiere = new Room (" in a great clearing", "images/clairiere2.jpg");
-        Room vFee = new Room (" face to face with a little woods fairy", "images/fee2.jpg");
-        Room vCascade = new Room (" in front of a big water cascade", "images/cascade_deau2.jpg");
-        Room vElfe = new Room (" face to face with a elven", "images/elfe2.jpg");
-        Room vPiece = new Room (" facing a gold coin on the floor", "images/foret_piece_dor2.jpg");
-        Room vLutin = new Room (" face to face with a pixie", "images/lutin2.jpg");
-        Room vArbre = new Room (" face to face with a living tree", "images/perso_arbre2.jpg");
-        Room vLivre = new Room (" facing a magic book", "images/objet_livre2.jpg");
-        Room vSorciere = new Room (" in a secret room, face to face with a witch", "images/sorciere2.jpg");
+        Room vChaudron = new Room (" at the foot of the rainbow", "images/chaudron_dor2.jpg", null);
+        Room vClairiere = new Room (" in a great clearing", "images/clairiere2.jpg", null);
+        Room vFee = new Room (" face to face with a little woods fairy", "images/fee2.jpg", null);
+        Room vCascade = new Room (" in front of a big water cascade", "images/cascade_deau2.jpg", vIEau);
+        Room vElfe = new Room (" face to face with a elven", "images/elfe2.jpg", null);
+        Room vPiece = new Room (" facing a gold coin on the floor", "images/foret_piece_dor2.jpg", null);
+        Room vLutin = new Room (" face to face with a pixie", "images/lutin2.jpg", null);
+        Room vArbre = new Room (" face to face with a living tree", "images/perso_arbre2.jpg", null);
+        Room vLivre = new Room (" facing a magic book", "images/objet_livre2.jpg", vILivre);
+        Room vSorciere = new Room (" in a secret room, face to face with a witch", "images/sorciere2.jpg", null);
 
         //positionner les sorties
         vChaudron.setExits ("East", vSorciere);
