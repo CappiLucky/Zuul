@@ -1,3 +1,4 @@
+import java.util.HashMap;
 
 /**
  * Project Zuul
@@ -13,6 +14,8 @@ public class GameEngine
     private Room aCurrentRoom;
     private Parser aParser;
     private UserInterface aGui;
+    public HashMap <Room, String> aRoomsHM; //HashMap reliant les Rooms et leur nom
+    
     
     /**
      * Constructor for objects of class GameEngine
@@ -20,6 +23,7 @@ public class GameEngine
     public GameEngine()
     {
        aParser = new Parser();
+       aRoomsHM = new HashMap <Room, String> (); 
        createRooms();
     }
     
@@ -88,6 +92,18 @@ public class GameEngine
 
         //initialiser le lieu de depart
         this.aCurrentRoom = vChaudron;
+        
+        //initialisation de la aRoomsHM
+        aRoomsHM.put(vChaudron, "caldron'room");
+        aRoomsHM.put(vClairiere, "clearing'room");
+        aRoomsHM.put(vFee, "woods fairy'room");
+        aRoomsHM.put(vCascade, "water cascade'room");
+        aRoomsHM.put(vElfe, "elven'room");
+        aRoomsHM.put(vPiece, "gold coin'room");
+        aRoomsHM.put(vLutin, "pixie'room");
+        aRoomsHM.put(vArbre, "living tree'room");
+        aRoomsHM.put(vLivre, "magic book'room");
+        aRoomsHM.put(vSorciere, "witch'room");
     } //createRooms() 
     
     /**
