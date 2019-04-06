@@ -1,5 +1,8 @@
 /* doit encore :
 * - bouton OK --> faire d'autres
+* - commande back
+* 
+* J'en suis a 7.23
 */
 
 /**

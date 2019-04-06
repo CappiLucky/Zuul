@@ -55,7 +55,7 @@ public class Room
             return ("\n" + "You are " + this.aDescription + ".\n" + getExitString());
         } else {
             return ("\n" + "You are " + this.aDescription + ".\n" 
-                + "Objet in this room is " + this.getItemString() + ".\n" 
+                + this.getItemString() + ".\n" 
                 + getExitString() );
         }
     } //getLongDescription()

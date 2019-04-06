@@ -16,7 +16,6 @@ public class GameEngine
     private UserInterface aGui;
     public HashMap <Room, String> aRoomsHM; //HashMap reliant les Rooms et leur nom
     
-    
     /**
      * Constructor for objects of class GameEngine
      */
@@ -56,7 +55,7 @@ public class GameEngine
      */
     private void createRooms ()
     {
-        //declaration des Item
+        //declaration des Items
         Item vIPiece1 = new Item ("gold coin number 1", 1);
         Item vIPiece2 = new Item ("gold coin number 2", 1);
         Item vIPiece3 = new Item ("gold coin number 3", 1);
@@ -106,11 +105,8 @@ public class GameEngine
         //ajout des item dans les rooms
         vChaudron.addItem ("claudron", vIChaudron);
         vClairiere.addItem ("mushrooms", vIChampi);
-        //vFee.addItem ("", null);
-        vCascade.addItem ("", vIEau);
+        vCascade.addItem ("water", vIEau);
         vPiece.addItem ("gold coin number 1", vIPiece1);
-        //vLutin.addItem ("", null);
-        //vArbre.addItem ("", null);
         vLivre.addItem ("magik book", vILivre);
         vLivre.addItem ("flower", vIFleur);
         
@@ -227,8 +223,12 @@ public class GameEngine
         aGui.println ("You have eaten now and you are not hungry any more.");
     } //eat() 
     
-    
-    //non obligatoire (?)
+    /**
+     * Allow you to go back
+     */
+    private void back () {
+        
+    } //back()
     
     /**
      * When you arrived in a new room, this methode print description and exits available
@@ -239,6 +239,7 @@ public class GameEngine
         aGui.println("\n");
     } //printLocationInfo()  
     
+    //non obligatoire (?)
     /**
      * Command to quit game
      * 
