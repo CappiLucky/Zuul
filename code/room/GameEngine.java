@@ -56,23 +56,30 @@ public class GameEngine
      */
     private void createRooms ()
     {
-        //declaration des items
-        Items vIPiece = new Items ("gold coin", 1);
-        Items vIEau = new Items ("water", 1);
-        Items vILivre = new Items ("book", 1);
-            //a finir
+        //declaration des Item
+        Item vIPiece1 = new Item ("gold coin number 1", 1);
+        Item vIPiece2 = new Item ("gold coin number 2", 1);
+        Item vIPiece3 = new Item ("gold coin number 3", 1);
+        Item vIPiece4 = new Item ("gold coin number 4", 1);
+        Item vIPiece5 = new Item ("gold coin number 5", 1);
+        Item vIEau = new Item ("cup of water", 1);
+        Item vILivre = new Item ("magik book", 1);
+        Item vIChampi = new Item ("mushrooms", 1);
+        Item vIClef = new Item ("key", 1);
+        Item vIChaudron = new Item ("claudron", 10);
+        Item vIFleur = new Item ("flower", 1);
         
         //declaration des variables Room
-        Room vChaudron = new Room (" at the foot of the rainbow", "images/chaudron_dor2.jpg", null);
-        Room vClairiere = new Room (" in a great clearing", "images/clairiere2.jpg", null);
-        Room vFee = new Room (" face to face with a little woods fairy", "images/fee2.jpg", null);
-        Room vCascade = new Room (" in front of a big water cascade", "images/cascade_deau2.jpg", vIEau);
-        Room vElfe = new Room (" face to face with a elven", "images/elfe2.jpg", null);
-        Room vPiece = new Room (" facing a gold coin on the floor", "images/foret_piece_dor2.jpg", null);
-        Room vLutin = new Room (" face to face with a pixie", "images/lutin2.jpg", null);
-        Room vArbre = new Room (" face to face with a living tree", "images/perso_arbre2.jpg", null);
-        Room vLivre = new Room (" facing a magic book", "images/objet_livre2.jpg", vILivre);
-        Room vSorciere = new Room (" in a secret room, face to face with a witch", "images/sorciere2.jpg", null);
+        Room vChaudron = new Room (" at the foot of the rainbow", "images/chaudron_dor2.jpg"); //endroit ou il faut ramener les 5pieces
+        Room vClairiere = new Room (" in a great clearing", "images/clairiere2.jpg");
+        Room vFee = new Room (" face to face with a little woods fairy", "images/fee2.jpg"); //donne une piece d'or 2
+        Room vCascade = new Room (" in front of a big water cascade", "images/cascade_deau2.jpg");
+        Room vElfe = new Room (" face to face with a elven", "images/elfe2.jpg"); //donne une piece d'or 3
+        Room vPiece = new Room (" facing a gold coin on the floor", "images/foret_piece_dor2.jpg");
+        Room vLutin = new Room (" face to face with a pixie", "images/lutin2.jpg"); //donne une piece d'or 4
+        Room vArbre = new Room (" face to face with a living tree", "images/perso_arbre2.jpg"); //donne une piece d'or 5
+        Room vLivre = new Room (" facing a magic book", "images/objet_livre2.jpg");
+        Room vSorciere = new Room (" in a secret room, face to face with a witch", "images/sorciere2.jpg"); //donne la clé
 
         //positionner les sorties
         vChaudron.setExits ("East", vSorciere);
@@ -95,7 +102,18 @@ public class GameEngine
         vArbre.setExits ("East", vLivre);
         vLivre.setExits ("West", vArbre);
         vSorciere.setExits ("West", vChaudron);
-
+        
+        //ajout des item dans les rooms
+        vChaudron.addItem ("claudron", vIChaudron);
+        vClairiere.addItem ("mushrooms", vIChampi);
+        //vFee.addItem ("", null);
+        vCascade.addItem ("", vIEau);
+        vPiece.addItem ("gold coin number 1", vIPiece1);
+        //vLutin.addItem ("", null);
+        //vArbre.addItem ("", null);
+        vLivre.addItem ("magik book", vILivre);
+        vLivre.addItem ("flower", vIFleur);
+        
         //initialiser le lieu de depart
         this.aCurrentRoom = vChaudron;
         

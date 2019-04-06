@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.Set;
 import java.util.Iterator;
+
 /**
  * Project Zuul
  * Class for make action on room
@@ -10,10 +11,11 @@ import java.util.Iterator;
  */
 public class Room
 {
-    public HashMap <String, Room> aExitHM;
+    public HashMap <String, Room> aExitHM; //HashMap reliant les room et leur sortie
+    public HashMap <String, Item> aItemHM; //HashMap reliant les room et leur item
     private String aDescription; 
     private String aImageName;
-    private Items aItem;
+    //private Item aItem;
 
     /**
      * Create a room described by "pDescription".
@@ -22,12 +24,13 @@ public class Room
      * 
      * @param pDescription The description of the room
      */
-    public Room (final String pDescription, final String pImage, final Items pItem) 
+    public Room (final String pDescription, final String pImage/*, final Item pItem*/) 
     {
         this.aDescription = pDescription;
         aExitHM = new HashMap <String, Room> ();
+        aItemHM = new HashMap <String, Item> ();
         this.aImageName = pImage;
-        this.aItem = pItem;
+        //this.aItem = pItem;
     } //Room(..)
 
     /**
@@ -48,9 +51,15 @@ public class Room
      */
     public String getLongDescription()
     {
-        return ("You are " + this.aDescription + ".\n" + getExitString());
+        if (this.aItemHM.isEmpty()) {
+            return ("\n" + "You are " + this.aDescription + ".\n" + getExitString());
+        } else {
+            return ("\n" + "You are " + this.aDescription + ".\n" 
+                + "Objet in this room is " + this.getItemString() + ".\n" 
+                + getExitString() );
+        }
     } //getLongDescription()
-    
+
     /**
      * Define the exits of the room.
      * Every direction either leads to another room or is null (no exit there)
@@ -60,7 +69,7 @@ public class Room
      */
     public void setExits (final String pDirection, final Room pRoom /* final Room pNorthExit, final Room pEastExit, final Room pSouthExit, final Room pWestExit*/)
     {
-        aExitHM.put(pDirection, pRoom);
+        this.aExitHM.put(pDirection, pRoom);
     } //setExits(....)
 
     /**
@@ -91,12 +100,25 @@ public class Room
         }
         return vExit; 
     } //getExitString()
-    
+
     /**
      * Return a string describing the room's image name
      */
     public String getImageName() 
     {
         return aImageName;
-    } 
+    } //getImageName()
+
+    public String getItemString () {
+        String vReturnString = "Objects :";
+        Set<String> vKeys = this.aItemHM.keySet();
+        for (String vItem : vKeys) {
+            vReturnString += "\n" + aItemHM.get(vItem).getItemInformation();
+        }
+        return vReturnString;
+    } //getItemString()
+
+    public void addItem (final String pName, final Item pItem) {
+        this.aItemHM.put(pName, pItem);
+    }
 }// Room

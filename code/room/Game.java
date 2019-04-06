@@ -1,7 +1,5 @@
 /* doit encore :
 * - bouton OK --> faire d'autres
-* - creer les items disponible dans le jeu
-* - ajouter la description des differents items
 */
 
 /**
