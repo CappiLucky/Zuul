@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Stack;
 
 /**
  * Project Zuul
@@ -15,6 +16,7 @@ public class GameEngine
     private Parser aParser;
     private UserInterface aGui;
     public HashMap <Room, String> aRoomsHM; //HashMap reliant les Rooms et leur nom
+    public Stack <Room> aAntRoom; //pile des room precedentes
     
     /**
      * Constructor for objects of class GameEngine
@@ -23,6 +25,7 @@ public class GameEngine
     {
        aParser = new Parser();
        aRoomsHM = new HashMap <Room, String> (); 
+       aAntRoom = new Stack <Room> ();
        createRooms();
     }
     
@@ -44,7 +47,6 @@ public class GameEngine
 
         aGui.println("Type 'help' if you need help.");
         aGui.println("\n");
-        //gui.println(aCurrentRoom.getLongDescription());
         
         aGui.println(aCurrentRoom.getLongDescription()); 
         aGui.showImage(aCurrentRoom.getImageName()); 
@@ -133,9 +135,9 @@ public class GameEngine
      */
     public void interpretCommand(String pCommandLine) 
     {
-        aGui.println(pCommandLine);
+        aGui.println ("*****************************************");
+        aGui.println("Your command is : " + pCommandLine);
         Command command = aParser.getCommand(pCommandLine);
-
         if(command.isUnknown()) {
             aGui.println("I don't know what you mean...");
             return;
@@ -156,6 +158,8 @@ public class GameEngine
             look();
         else if (commandWord.equals("eat"))
             eat();
+        else if (commandWord.equals("back"))
+            back();
     }
     
     /**
@@ -192,6 +196,7 @@ public class GameEngine
         {
             aGui.println ("There is no door !");
         } else {
+            this.aAntRoom.push (this.aCurrentRoom);
             this.aCurrentRoom = vNextRoom;
             printLocationInfo();
             if (aCurrentRoom.getImageName() != null)
@@ -227,7 +232,13 @@ public class GameEngine
      * Allow you to go back
      */
     private void back () {
-        
+        if ( ! this.aAntRoom.empty()) {
+            this.aCurrentRoom = this.aAntRoom.pop();
+            this.aGui.println (this.aCurrentRoom.getLongDescription());
+            if (this.aCurrentRoom.getImageName() != null) 
+                this.aGui.showImage (this.aCurrentRoom.getImageName());
+        }else
+            aGui.println ("--> You can't go back");        
     } //back()
     
     /**
@@ -236,7 +247,6 @@ public class GameEngine
     private void printLocationInfo ()
     {
         aGui.println (this.aCurrentRoom.getLongDescription());
-        aGui.println("\n");
     } //printLocationInfo()  
     
     //non obligatoire (?)

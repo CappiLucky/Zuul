@@ -19,8 +19,11 @@ public class UserInterface implements ActionListener
     private JTextField aEntryField;
     private JTextArea  aLog;
     private JLabel     aImage;
-    private JButton    aButton;
     private Parser     aParser;
+    //creation des bouttons
+    private JButton    aButtonHelp;
+    private JButton    aButtonLook;
+    private JButton    aButtonBack;
 
     /**
      * Construct a UserInterface. As a parameter, a Game Engine
@@ -85,9 +88,6 @@ public class UserInterface implements ActionListener
         this.aMyFrame = new JFrame( "Alerte au pied de l'arc en ciel" ); //titre de la fenetre
         this.aEntryField = new JTextField( 34 ); //police d'ecriture
         
-        //creation bouttons :
-        this.aButton =  new JButton ("help");
-
         this.aLog = new JTextArea();
         this.aLog.setEditable( false );
         JScrollPane vListScroller = new JScrollPane( this.aLog );
@@ -96,23 +96,39 @@ public class UserInterface implements ActionListener
 
         JPanel vPanel = new JPanel();
         this.aImage = new JLabel();
+        JPanel vPanelButtonCommande = new JPanel();
+        
+        
+        //creation bouttons d'actions:
+        this.aButtonHelp =  new JButton ("help");
+        this.aButtonLook = new JButton ("look");
+        this.aButtonBack = new JButton ("back");
         
         //disposition de la fenetre de jeu
         vPanel.setLayout( new BorderLayout() );
         vPanel.add( this.aImage, BorderLayout.NORTH );
         vPanel.add( vListScroller, BorderLayout.CENTER );
         vPanel.add( this.aEntryField, BorderLayout.SOUTH );
-        vPanel.add( this.aButton, BorderLayout.EAST);
-
+            //ajout d'autres boutons
+        vPanelButtonCommande.add( this.aButtonHelp, BorderLayout.EAST); 
+        vPanelButtonCommande.add( this.aButtonLook, BorderLayout.WEST); 
+        vPanelButtonCommande.add( this.aButtonBack, BorderLayout.SOUTH); 
+        
+        
         this.aMyFrame.getContentPane().add( vPanel, BorderLayout.CENTER );
-
+            //ajout d'autres panels
+        this.aMyFrame.getContentPane().add( vPanelButtonCommande, BorderLayout.EAST );
+        
+        
         // add some event listeners to some components
         this.aMyFrame.addWindowListener( new WindowAdapter() {
             public void windowClosing(WindowEvent e) { System.exit(0); }
         } );
 
         this.aEntryField.addActionListener( this );
-        this.aButton.addActionListener (this);
+        this.aButtonHelp.addActionListener (this);
+        this.aButtonLook.addActionListener (this);
+        this.aButtonBack.addActionListener (this);
 
         this.aMyFrame.pack();
         this.aMyFrame.setVisible( true );
@@ -127,9 +143,13 @@ public class UserInterface implements ActionListener
         // no need to check the type of action at the moment.
         // there is only one possible action: text entry
         Object vSource=pE.getSource();
-        if (vSource==aButton){
+        if (vSource==aButtonHelp){
             aEngine.interpretCommand("help");
-        }
+        } else if (vSource==aButtonLook) {
+            aEngine.interpretCommand("look");
+        } else if (vSource==aButtonBack) {
+            aEngine.interpretCommand("back");
+        } 
         else this.processCommand();
     } // actionPerformed(.)
 
