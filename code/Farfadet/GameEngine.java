@@ -19,18 +19,21 @@ public class GameEngine
     private UserInterface aGui;
     public HashMap <Room, String> aRoomsHM; //HashMap reliant les Rooms et leur nom
     public Stack <Room> aAntRoom; //pile des room precedentes
-    
+    private Player aPlayer;
+    //stoker une collection de joueur
+
     /**
      * Constructor for objects of class GameEngine
      */
     public GameEngine()
     {
-       aParser = new Parser();
-       aRoomsHM = new HashMap <Room, String> (); 
-       aAntRoom = new Stack <Room> ();
-       createRooms();
+        aParser = new Parser();
+        aRoomsHM = new HashMap <Room, String> (); 
+        aAntRoom = new Stack <Room> ();
+        createRooms();
+        aPlayer = new Player("farfadet", aCurrentRoom, 100);
     }
-    
+
     /**
      * Create interface of the user
      * 
@@ -39,25 +42,10 @@ public class GameEngine
     public void setGUI(UserInterface pUserInterface)
     {
         aGui = pUserInterface;
-        printWelcome();
+        aPlayer.printWelcome();
     }
-    
-    /**
-     * The welcome text when you start a new game 
-     */
-    private void printWelcome ()
-    {
-        aGui.println("Welcome to the World of Zuul!");
-        aGui.println("The game name is : Alerte au pied de l'arc en ciel");
-        aGui.println("In a magical forest : you, a farfadet, are called urgently at the foot of the rainbow because gold coin from the cauldron have been stolen !");
-        aGui.println ("Then, you have to cross the forest to try to find the stolen gold coin");
 
-        aGui.println("Type 'help' if you need help.");
-        aGui.println("\n");
-        
-        aGui.println(aCurrentRoom.getLongDescription()); 
-        aGui.showImage(aCurrentRoom.getImageName()); 
-    } //printWelcome()
+    //printwelcome dans player
     
     /**
      * Create Room of the game with his descriptions and exits 
@@ -65,18 +53,18 @@ public class GameEngine
     private void createRooms ()
     {
         //declaration des Items
-        Item vIPiece1 = new Item ("gold coin number 1", 1);
-        Item vIPiece2 = new Item ("gold coin number 2", 1);
-        Item vIPiece3 = new Item ("gold coin number 3", 1);
-        Item vIPiece4 = new Item ("gold coin number 4", 1);
-        Item vIPiece5 = new Item ("gold coin number 5", 1);
-        Item vIEau = new Item ("cup of water", 1);
-        Item vILivre = new Item ("magik book", 1);
-        Item vIChampi = new Item ("mushrooms", 1);
-        Item vIClef = new Item ("key", 1);
-        Item vIChaudron = new Item ("claudron", 10);
-        Item vIFleur = new Item ("flower", 1);
-        
+        Item vIPiece1 = new Item ("gold coin", "gold coin number 1", 1);
+        Item vIPiece2 = new Item ("gold coin", "gold coin number 2", 1);
+        Item vIPiece3 = new Item ("gold coin", "gold coin number 3", 1);
+        Item vIPiece4 = new Item ("gold coin", "gold coin number 4", 1);
+        Item vIPiece5 = new Item ("gold coin", "gold coin number 5", 1);
+        Item vIEau = new Item ("cup of water", "cup of water which going to the big water cascade", 1);
+        Item vILivre = new Item ("magik book", "magik and ancient book with many secrets", 1);
+        Item vIChampi = new Item ("mushrooms", "good mushrooms for the great clearing", 1);
+        Item vIClef = new Item ("key", "claudron'key", 1);
+        Item vIChaudron = new Item ("claudron", "contains the gold coin", 10);
+        Item vIFleur = new Item ("flower", "flower, is nothing else", 1);
+
         //declaration des variables Room
         Room vChaudron = new Room (" at the foot of the rainbow", "images/chaudron_dor2.jpg"); //endroit ou il faut ramener les 5pieces
         Room vClairiere = new Room (" in a great clearing", "images/clairiere2.jpg");
@@ -110,7 +98,7 @@ public class GameEngine
         vArbre.setExits ("East", vLivre);
         vLivre.setExits ("West", vArbre);
         vSorciere.setExits ("West", vChaudron);
-        
+
         //ajout des item dans les rooms
         vChaudron.addItem ("claudron", vIChaudron);
         vClairiere.addItem ("mushrooms", vIChampi);
@@ -118,10 +106,10 @@ public class GameEngine
         vPiece.addItem ("gold coin number 1", vIPiece1);
         vLivre.addItem ("magik book", vILivre);
         vLivre.addItem ("flower", vIFleur);
-        
+
         //initialiser le lieu de depart
         this.aCurrentRoom = vChaudron;
-        
+
         //initialisation de la aRoomsHM
         aRoomsHM.put(vChaudron, "caldron'room");
         aRoomsHM.put(vClairiere, "clearing'room");
@@ -134,7 +122,7 @@ public class GameEngine
         aRoomsHM.put(vLivre, "magic book'room");
         aRoomsHM.put(vSorciere, "witch'room");
     } //createRooms() 
-    
+
     /**
      * Given a command, process (that is: execute) the command.
      * If this command ends the game, true is returned, otherwise false is
@@ -164,17 +152,21 @@ public class GameEngine
                 endGame();
         } 
         else if (commandWord.equals("look"))
-            look();
+            aPlayer.look();
         else if (commandWord.equals("eat"))
-            eat();
+            aPlayer.eat();
         else if (commandWord.equals("back"))
             back();
         else if (commandWord.equals("test")) {
             if (command.hasSecondWord())
                 test(command.getSecondWord());
         }
+        else if (commandWord.equals("take"))
+            aPlayer.takeItem(command.getSecondWord());
+        else if (commandWord.equals("drop"))
+            aPlayer.dropItem(command.getSecondWord());
     }
-    
+
     /**
      * The help text when you write "help"
      */
@@ -186,7 +178,7 @@ public class GameEngine
         aGui.println("Your command words are:");
         aGui.println(aParser.showCommands());
     } //printHelp()
-    
+
     /**
      * Go in the room passed in parameters
      * 
@@ -199,9 +191,9 @@ public class GameEngine
             aGui.println("Go where?");
             return;
         }
-        
+
         String vDirection = pCommand.getSecondWord();
-        
+
         //try to leave current room
         Room vNextRoom = aCurrentRoom.getExit(vDirection);
 
@@ -211,12 +203,12 @@ public class GameEngine
         } else {
             this.aAntRoom.push (this.aCurrentRoom);
             this.aCurrentRoom = vNextRoom;
-            printLocationInfo();
+            aPlayer.printLocationInfo();
             if (aCurrentRoom.getImageName() != null)
                 aGui.showImage(aCurrentRoom.getImageName());
         }    
     } //procedure goRoom() 
-    
+
     /**
      * Ending game
      */
@@ -225,25 +217,10 @@ public class GameEngine
         aGui.println("Thank you for playing.  Good bye.");
         aGui.enable(false);
     } 
-    
+
     //autres fonctions
-    
-    /**
-     * Allow you to look around you
-     */
-    private void look () 
-    {
-        printLocationInfo();
-    } //look()
-    
-    /**
-     * Allow you to eat something
-     */
-    private void eat ()
-    {
-        aGui.println ("You have eaten now and you are not hungry any more.");
-    } //eat() 
-    
+    //eat et look deplacer dans player
+
     /**
      * Allow you to go back
      */
@@ -256,15 +233,9 @@ public class GameEngine
         }else
             aGui.println ("--> You can't go back");        
     } //back()
-    
-    /**
-     * When you arrived in a new room, this methode print description and exits available
-     */
-    private void printLocationInfo ()
-    {
-        aGui.println (this.aCurrentRoom.getLongDescription());
-    } //printLocationInfo()  
-    
+
+    //printlocationinfo dans player
+
     //non obligatoire (?)
     /**
      * Command to quit game
@@ -283,7 +254,7 @@ public class GameEngine
         {return vSecondWord;
         }
     } //quit() 
-    
+
     private void test (final String pNom) {
         Scanner vS;
         try {

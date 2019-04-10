@@ -1,0 +1,4 @@
+go West
+look
+back
+help

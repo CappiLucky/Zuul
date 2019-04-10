@@ -121,5 +121,9 @@ public class Room
 
     public void addItem (final String pName, final Item pItem) {
         this.aItemHM.put(pName, pItem);
-    }
+    } //adItem(..)
+    
+    public void removeItem (final  String pName, final Item pItem) {
+        this.aItemHM.remove(pName, pItem);
+    } //removeItem(..)
 }// Room

@@ -8,6 +8,7 @@
  */
 public class Item
 {
+    private String aName;
     private String aDescription;
     private int aWeight;
 
@@ -17,11 +18,20 @@ public class Item
      * @param pDescr description de l'objet
      * @param pWeight poids de l'objet
      */
-    public Item (final String pDescr, final int pWeight)
+    public Item (final String pName, final String pDescr, final int pWeight)
     {
+        this.aName = pName;
         this.aDescription = pDescr;
         this.aWeight = pWeight;
     }// construteur par defaut (...)
+
+    /**
+     * @return name of the object
+     */
+    public String getName()
+    {
+        return this.aName;
+    }
 
     /**
      * Return objet'description

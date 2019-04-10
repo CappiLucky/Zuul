@@ -1,8 +1,9 @@
 /* doit encore :
 * - bouton OK --> faire d'autres
-* - commande back
+* - creer un fichier de commande pour le parcours ideal pour gagner (7.28.2)
+* - Player()
 * 
-* J'en suis a 7.23
+* J'en suis a faire le 7.29
 */
 
 /**
