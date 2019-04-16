@@ -24,8 +24,6 @@ public class Game
      */
     public Game() 
     {
-        //createRooms();
-        //this.aParser = new Parser();
        aEngine = new GameEngine();
        aGui = new UserInterface(aEngine);
        aEngine.setGUI(aGui);

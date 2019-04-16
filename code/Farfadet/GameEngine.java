@@ -18,7 +18,6 @@ public class GameEngine
     private Parser aParser;
     private UserInterface aGui;
     public HashMap <Room, String> aRoomsHM; //HashMap reliant les Rooms et leur nom
-    public Stack <Room> aAntRoom; //pile des room precedentes
     private Player aPlayer;
     //stoker une collection de joueur
 
@@ -29,9 +28,8 @@ public class GameEngine
     {
         aParser = new Parser();
         aRoomsHM = new HashMap <Room, String> (); 
-        aAntRoom = new Stack <Room> ();
+        
         createRooms();
-        aPlayer = new Player("farfadet", aCurrentRoom, 100);
     }
 
     /**
@@ -41,12 +39,13 @@ public class GameEngine
      */
     public void setGUI(UserInterface pUserInterface)
     {
-        aGui = pUserInterface;
+        this.aGui = pUserInterface;
+        this.aPlayer.setGui(aGui);
         aPlayer.printWelcome();
     }
 
     //printwelcome dans player
-    
+
     /**
      * Create Room of the game with his descriptions and exits 
      */
@@ -108,7 +107,8 @@ public class GameEngine
         vLivre.addItem ("flower", vIFleur);
 
         //initialiser le lieu de depart
-        this.aCurrentRoom = vChaudron;
+        //this.aCurrentRoom = vChaudron;
+        this.aPlayer = new Player ("Farfadet", vChaudron);
 
         //initialisation de la aRoomsHM
         aRoomsHM.put(vChaudron, "caldron'room");
@@ -156,17 +156,22 @@ public class GameEngine
         else if (commandWord.equals("eat"))
             aPlayer.eat();
         else if (commandWord.equals("back"))
-            back();
+            aPlayer.back();
         else if (commandWord.equals("test")) {
             if (command.hasSecondWord())
                 test(command.getSecondWord());
         }
-        else if (commandWord.equals("take"))
-            aPlayer.takeItem(command.getSecondWord());
+        /* else if (commandWord.equals("take"))
+            if (!command.hasSecondWord()) 
+                this.aGui.println ("Take what ? \n");
+            else 
+                aPlayer.takeItem(command.getSecondWord());
         else if (commandWord.equals("drop"))
             aPlayer.dropItem(command.getSecondWord());
+        else if (commandWord.equals("inventory"))
+            inventory(); */
     }
-
+    
     /**
      * The help text when you write "help"
      */
@@ -191,21 +196,17 @@ public class GameEngine
             aGui.println("Go where?");
             return;
         }
-
         String vDirection = pCommand.getSecondWord();
 
         //try to leave current room
-        Room vNextRoom = aCurrentRoom.getExit(vDirection);
+        Room vNextRoom = aPlayer.getCurrentRoom().getExit(vDirection);
 
         if (vNextRoom == null)
         {
             aGui.println ("There is no door !");
         } else {
-            this.aAntRoom.push (this.aCurrentRoom);
-            this.aCurrentRoom = vNextRoom;
-            aPlayer.printLocationInfo();
-            if (aCurrentRoom.getImageName() != null)
-                aGui.showImage(aCurrentRoom.getImageName());
+            aPlayer.getStackRoom().push (aPlayer.getCurrentRoom());
+            aPlayer.changeRoom(vNextRoom);
         }    
     } //procedure goRoom() 
 
@@ -221,19 +222,12 @@ public class GameEngine
     //autres fonctions
     //eat et look deplacer dans player
 
-    /**
-     * Allow you to go back
-     */
-    private void back () {
-        if ( ! this.aAntRoom.empty()) {
-            this.aCurrentRoom = this.aAntRoom.pop();
-            this.aGui.println (this.aCurrentRoom.getLongDescription());
-            if (this.aCurrentRoom.getImageName() != null) 
-                this.aGui.showImage (this.aCurrentRoom.getImageName());
-        }else
-            aGui.println ("--> You can't go back");        
-    } //back()
+    
 
+    private void inventory () {
+        this.aGui.println ("You take : "+ this.aPlayer.getInventory().getItemsString() + "\n");
+    }//inventory()
+    
     //printlocationinfo dans player
 
     //non obligatoire (?)

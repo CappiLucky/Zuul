@@ -169,7 +169,6 @@ public class UserInterface implements ActionListener
     {
         String vInput = this.aEntryField.getText();
         this.aEntryField.setText( "" );
-
         this.aEngine.interpretCommand( vInput );
     } // processCommand()
 } // UserInterface 

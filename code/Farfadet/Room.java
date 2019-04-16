@@ -15,7 +15,7 @@ public class Room
     public HashMap <String, Item> aItemHM; //HashMap reliant les room et leur item
     private String aDescription; 
     private String aImageName;
-    //private Item aItem;
+    private ItemList aInventory;
 
     /**
      * Create a room described by "pDescription".
@@ -31,6 +31,7 @@ public class Room
         aExitHM = new HashMap <String, Room> ();
         aItemHM = new HashMap <String, Item> ();
         this.aImageName = pImage;
+        this.aInventory = new ItemList ();
         //this.aItem = pItem;
     } //Room(..)
 
@@ -119,11 +120,13 @@ public class Room
         return vReturnString;
     } //getItemString()
 
+    
+    
     public void addItem (final String pName, final Item pItem) {
         this.aItemHM.put(pName, pItem);
     } //adItem(..)
     
-    public void removeItem (final  String pName, final Item pItem) {
-        this.aItemHM.remove(pName, pItem);
+    public void removeItem (final  String pName) {
+        this.aItemHM.remove(pName);
     } //removeItem(..)
 }// Room
