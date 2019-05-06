@@ -15,7 +15,6 @@ public class Room
     public HashMap <String, Item> aItemHM; //HashMap reliant les room et leur item
     private String aDescription; 
     private String aImageName;
-    private ItemList aInventory;
 
     /**
      * Create a room described by "pDescription".
@@ -25,16 +24,15 @@ public class Room
      * @param pDescription The description of the room
      * @param pImage the name of the image
      */
-    public Room (final String pDescription, final String pImage/*, final Item pItem*/) 
+    public Room (final String pDescription, final String pImage) 
     {
         this.aDescription = pDescription;
         aExitHM = new HashMap <String, Room> ();
         aItemHM = new HashMap <String, Item> ();
         this.aImageName = pImage;
-        this.aInventory = new ItemList ();
-        //this.aItem = pItem;
     } //Room(..)
 
+    // ## Accesseurs ##
     /**
      * @return aDescription a String description of the room
      * (the one that was defined in the constructor)
@@ -42,7 +40,7 @@ public class Room
     public String getDescription ()
     {
         return this.aDescription;
-    }   
+    } //getDescription()
 
     /**
      * Return a long description of this room, of the form :
@@ -52,7 +50,7 @@ public class Room
      * @return A description of the room, including exits     
      */
     public String getLongDescription()
-    {
+    { 
         if (this.aItemHM.isEmpty()) {
             return ("\n" + "You are " + this.aDescription + ".\n" + getExitString());
         } else {
@@ -120,8 +118,7 @@ public class Room
         return vReturnString;
     } //getItemString()
 
-    
-    
+    // ## Methodes ##
     public void addItem (final String pName, final Item pItem) {
         this.aItemHM.put(pName, pItem);
     } //adItem(..)

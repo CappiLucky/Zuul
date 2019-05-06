@@ -2,6 +2,7 @@ import java.util.Stack;
 
 /**
  * Projet Zuul
+ * Class to controle the player
  *
  * @author Manon HERMANN    
  * @version v1
@@ -10,60 +11,128 @@ public class Player
 {
     private String aName;
     private Room aCurrentRoom;
-    private int aPoidsMax = 50;
+    private int aPoidsMax = 19;
+    private Item aItem;
     private ItemList aInventory;
     private UserInterface aGui; 
     public Stack <Room> aAntRoom; //pile des room precedentes
-    
+
+    /**
+     * Construtor of the player
+     * 
+     * @param pNom nom du joueur
+     * @param pCurrentRoom room ou commence le joueur
+     */
     public Player (final String pNom, final Room pCurrentRoom){
         this.aName = pNom;
         this.aCurrentRoom = pCurrentRoom;
-        aAntRoom = new Stack <Room> ();
+        this.aAntRoom = new Stack <Room> ();
+        this.aInventory = new ItemList ();
     } //constructeur par defaut de player
-    
-     public Room getCurrentRoom (){
-        return this.aCurrentRoom;
-    }
 
+    // ## accesseurs ##
+    /**
+     * Accesseur pour la salle courante
+     * 
+     * @return String de la salle
+     */
+    public Room getCurrentRoom (){
+        return this.aCurrentRoom;
+    } //getCurrentRoom()
+
+    public int getPoidMax () {
+        return this.aPoidsMax;
+    }
+    
+    /**
+     * Accesseur pour le nom du personnage
+     * 
+     * @return String du nom
+     */
     public String getName () {
         return this.aName;
-    }
-    
+    } //getName()
+
+    /**
+     * Accesseur set de la currentRoom
+     * 
+     * @param pRoom current room
+     */
     public void setCurrentRoom (final Room pRoom){
         this.aCurrentRoom = pRoom;
-    }
+    } //setCurrentRoom(.)
 
+    /**
+     * Accesseur de l'inventaire
+     * 
+     * @return ItemList liste de l'inventaire du player
+     */
     public ItemList getInventory (){
         return this.aInventory;
-    }
-    
+    } //getInventory()
+
+    /**
+     * Accesseur set du gui
+     * 
+     * @param pUserInterface interface du joueur
+     */
     public void setGui (final UserInterface pUserInterface){
         this.aGui = pUserInterface;
     } //setGui(.)
-    
-    //methodes : 
+
+    public Stack <Room> getStackRoom(){
+        return this.aAntRoom;
+    }
+
+    // ## methodes ##
+    /**
+     * Methode for chane room
+     * 
+     * @param pRoom pour indiquer la salle suivante
+     */
     public void changeRoom (final Room pRoom){
         this.aCurrentRoom = pRoom;
         this.aGui.println (this.aCurrentRoom.getLongDescription ());
         if (aCurrentRoom.getImageName() != null)
             aGui.showImage(aCurrentRoom.getImageName());
     } //changeRoom(.)
-    
-    //canBePickedUp boolean : 
-    //prendre et deposer (nom d'objet comme deuxieme mot) : drop + take qui verifie la contrainte de poids et retrouver la valeur false si nous ne pouvons pas l'emporter
-    /* public void takeItem (final String pNomItem) {
-        this.aInventory.setItem(pNomItem,this.aCurrentRoom.getItem(pNomItem));
-        this.aCurrentRoom.removeItem(pNomItem);
-    }
-    
-    public void dropItem (final String pNomItem) {
-        this.aCurrentRoom.setItem(pNomItem,this.aInventory.getItem(pNomItem));
-        this.aInventory.removeItem(pNomItem);
-    }*/
-    
-    //collection pour stocké les objets transporter par le joueur :
-    
-    //methode que peut utiliser le Player
+
+    /**
+     * Methode for take a item in currentRoom
+     * 
+     * @param pNomItem nom de l'item
+     */
+     public void takeItem (final Command pCommand) {
+         String vDescr = pCommand.getSecondWord();
+         Item vItem = this.aCurrentRoom.aItemHM.get(vDescr);
+         if (vItem == null) 
+             aGui.println ("this object do not exist");
+         else if (this.aPoidsMax < this.aInventory.getTotalWeight() + vItem.getWeight())
+             aGui.println ("your inventory is too heavy");
+         else {
+             this.aInventory.addItem(vDescr, vItem);
+             this.aCurrentRoom.aItemHM.remove(vDescr, vItem);
+             this.aGui.println (this.aInventory.getItemsString());
+         }
+     } //takeItem(.)
+  
+    /**
+     * Methode for drop a item in currentRoom
+     * 
+     * @param pNomItem nom de l'item
+     */
+    public void dropItem (final Command pCommand) {
+        String vDescr = pCommand.getSecondWord();
+        Item vItem = this.aCurrentRoom.aItemHM.get(vDescr);
+        if (vItem == null)
+            aGui.println ("can't drop this object");
+        else {
+            aInventory.removeItem(vDescr, vItem);
+            this.aCurrentRoom.aItemHM.put(vDescr, vItem);
+        }
+        this.aGui.println (this.aInventory.getItemsString());
+    } //dropItem(.)     
+  
     /**
      * Allow you to look around you
      */
@@ -71,7 +140,7 @@ public class Player
     {
         printLocationInfo();
     } //look()
-    
+
     /**
      * Allow you to eat something
      */
@@ -79,15 +148,7 @@ public class Player
     {
         this.aGui.println ("You have eaten now and you are not hungry any more.");
     } //eat() 
-    
-    /**
-     * When you arrived in a new room, this methode print description and exits available
-     */
-    public void printLocationInfo ()
-    {
-        aGui.println (this.aCurrentRoom.getLongDescription());
-    } //printLocationInfo()  
-    
+
     /**
      * Allow you to go back
      */
@@ -100,12 +161,16 @@ public class Player
         }else
             aGui.println ("--> You can't go back");        
     } //back()
-    
-    public Stack <Room> getStackRoom(){
-        return this.aAntRoom;
-    }
-    
-    
+
+    // ## Affichage ##
+    /**
+     * When you arrived in a new room, this methode print description and exits available
+     */
+    public void printLocationInfo ()
+    {
+        aGui.println (this.aCurrentRoom.getLongDescription());
+    } //printLocationInfo() 
+
     /**
      * The welcome text when you start a new game 
      */
@@ -122,4 +187,4 @@ public class Player
         aGui.println(aCurrentRoom.getLongDescription()); 
         aGui.showImage(aCurrentRoom.getImageName()); 
     } //printWelcome()
-}
+} //Player

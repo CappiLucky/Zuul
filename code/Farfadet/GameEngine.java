@@ -40,7 +40,7 @@ public class GameEngine
     public void setGUI(UserInterface pUserInterface)
     {
         this.aGui = pUserInterface;
-        this.aPlayer.setGui(aGui);
+        this.aPlayer.setGui(aGui); //lui dire qu'une Interface du joueur existe
         aPlayer.printWelcome();
     }
 
@@ -51,7 +51,7 @@ public class GameEngine
      */
     private void createRooms ()
     {
-        //declaration des Items
+        //declaration des Items 
         Item vIPiece1 = new Item ("gold coin", "gold coin number 1", 1);
         Item vIPiece2 = new Item ("gold coin", "gold coin number 2", 1);
         Item vIPiece3 = new Item ("gold coin", "gold coin number 3", 1);
@@ -61,8 +61,9 @@ public class GameEngine
         Item vILivre = new Item ("magik book", "magik and ancient book with many secrets", 1);
         Item vIChampi = new Item ("mushrooms", "good mushrooms for the great clearing", 1);
         Item vIClef = new Item ("key", "claudron'key", 1);
-        Item vIChaudron = new Item ("claudron", "contains the gold coin", 10);
+        Item vIChaudron = new Item ("claudron", "contains the gold coin", 20);
         Item vIFleur = new Item ("flower", "flower, is nothing else", 1);
+        Item vMagikCookie = new Item ("magik cookie", "upgrade your storage", 0);
 
         //declaration des variables Room
         Room vChaudron = new Room (" at the foot of the rainbow", "images/chaudron_dor2.jpg"); //endroit ou il faut ramener les 5pieces
@@ -161,15 +162,15 @@ public class GameEngine
             if (command.hasSecondWord())
                 test(command.getSecondWord());
         }
-        /* else if (commandWord.equals("take"))
+        else if (commandWord.equals("take"))
             if (!command.hasSecondWord()) 
                 this.aGui.println ("Take what ? \n");
             else 
-                aPlayer.takeItem(command.getSecondWord());
+                aPlayer.takeItem(command);
         else if (commandWord.equals("drop"))
-            aPlayer.dropItem(command.getSecondWord());
+            aPlayer.dropItem(command);  
         else if (commandWord.equals("inventory"))
-            inventory(); */
+            this.aGui.println (this.aPlayer.getInventory().inventory());
     }
     
     /**
@@ -179,6 +180,7 @@ public class GameEngine
     {
         aGui.println("You are lost.");
         aGui.println("You can refer to the map");
+        aGui.println("Your maximal weight is " + this.aPlayer.getPoidMax());
         aGui.println("\n");
         aGui.println("Your command words are:");
         aGui.println(aParser.showCommands());
@@ -222,11 +224,6 @@ public class GameEngine
     //autres fonctions
     //eat et look deplacer dans player
 
-    
-
-    private void inventory () {
-        this.aGui.println ("You take : "+ this.aPlayer.getInventory().getItemsString() + "\n");
-    }//inventory()
     
     //printlocationinfo dans player
 

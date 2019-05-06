@@ -1,38 +1,38 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<html lang="fr">
 <head>
 <title>Source code</title>
 <link rel="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
 </head>
 <body>
 <div class="sourceContainer">
-<pre><span class="sourceLineNo">001</span><a name="line.1"></a>
-<span class="sourceLineNo">002</span>/**<a name="line.2"></a>
-<span class="sourceLineNo">003</span> * Project Zuul<a name="line.3"></a>
-<span class="sourceLineNo">004</span> * Class for capture words<a name="line.4"></a>
-<span class="sourceLineNo">005</span> * <a name="line.5"></a>
-<span class="sourceLineNo">006</span> * @author Manon HERMANN<a name="line.6"></a>
-<span class="sourceLineNo">007</span> * @version v1<a name="line.7"></a>
-<span class="sourceLineNo">008</span> */<a name="line.8"></a>
-<span class="sourceLineNo">009</span>public class Command<a name="line.9"></a>
-<span class="sourceLineNo">010</span>{<a name="line.10"></a>
-<span class="sourceLineNo">011</span>    private String aCommandWord;<a name="line.11"></a>
-<span class="sourceLineNo">012</span>    private String aSecondWord;<a name="line.12"></a>
-<span class="sourceLineNo">013</span>    <a name="line.13"></a>
-<span class="sourceLineNo">014</span>    /**<a name="line.14"></a>
-<span class="sourceLineNo">015</span>     * Create a command object. First and second word must be supplied, but<a name="line.15"></a>
-<span class="sourceLineNo">016</span>     * either one (or both) can be null. The command word should be null to<a name="line.16"></a>
-<span class="sourceLineNo">017</span>     * indicate that this was a command that is not recognised by this game.<a name="line.17"></a>
-<span class="sourceLineNo">018</span>     * <a name="line.18"></a>
-<span class="sourceLineNo">019</span>     * @param pCommandWord 1er mot ecrit<a name="line.19"></a>
-<span class="sourceLineNo">020</span>     * @param pSecondWord 2eme mot ecrit<a name="line.20"></a>
-<span class="sourceLineNo">021</span>     */<a name="line.21"></a>
-<span class="sourceLineNo">022</span>    public Command (final String pCommandWord, final String pSecondWord)<a name="line.22"></a>
-<span class="sourceLineNo">023</span>    {<a name="line.23"></a>
-<span class="sourceLineNo">024</span>        this.aCommandWord = pCommandWord;<a name="line.24"></a>
-<span class="sourceLineNo">025</span>        this.aSecondWord = pSecondWord;<a name="line.25"></a>
-<span class="sourceLineNo">026</span>    } //Command(..) <a name="line.26"></a>
-<span class="sourceLineNo">027</span>    <a name="line.27"></a>
+<pre><span class="sourceLineNo">001</span>/**<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Project Zuul<a name="line.2"></a>
+<span class="sourceLineNo">003</span> * Class for capture words<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * <a name="line.4"></a>
+<span class="sourceLineNo">005</span> * @author Manon HERMANN<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * @version v1<a name="line.6"></a>
+<span class="sourceLineNo">007</span> */<a name="line.7"></a>
+<span class="sourceLineNo">008</span>public class Command<a name="line.8"></a>
+<span class="sourceLineNo">009</span>{<a name="line.9"></a>
+<span class="sourceLineNo">010</span>    private String aCommandWord;<a name="line.10"></a>
+<span class="sourceLineNo">011</span>    private String aSecondWord;<a name="line.11"></a>
+<span class="sourceLineNo">012</span><a name="line.12"></a>
+<span class="sourceLineNo">013</span>    /**<a name="line.13"></a>
+<span class="sourceLineNo">014</span>     * Create a command object. First and second word must be supplied, but<a name="line.14"></a>
+<span class="sourceLineNo">015</span>     * either one (or both) can be null. The command word should be null to<a name="line.15"></a>
+<span class="sourceLineNo">016</span>     * indicate that this was a command that is not recognised by this game.<a name="line.16"></a>
+<span class="sourceLineNo">017</span>     * <a name="line.17"></a>
+<span class="sourceLineNo">018</span>     * @param pCommandWord 1er mot ecrit<a name="line.18"></a>
+<span class="sourceLineNo">019</span>     * @param pSecondWord 2eme mot ecrit<a name="line.19"></a>
+<span class="sourceLineNo">020</span>     */<a name="line.20"></a>
+<span class="sourceLineNo">021</span>    public Command (final String pCommandWord, final String pSecondWord)<a name="line.21"></a>
+<span class="sourceLineNo">022</span>    {<a name="line.22"></a>
+<span class="sourceLineNo">023</span>        this.aCommandWord = pCommandWord;<a name="line.23"></a>
+<span class="sourceLineNo">024</span>        this.aSecondWord = pSecondWord;<a name="line.24"></a>
+<span class="sourceLineNo">025</span>    } //Command(..) <a name="line.25"></a>
+<span class="sourceLineNo">026</span>    <a name="line.26"></a>
+<span class="sourceLineNo">027</span>    // ## Accesseurs ##<a name="line.27"></a>
 <span class="sourceLineNo">028</span>    /**<a name="line.28"></a>
 <span class="sourceLineNo">029</span>     * Return the command word (the first word) of this command. If the<a name="line.29"></a>
 <span class="sourceLineNo">030</span>     * command was not understood, the result is null.<a name="line.30"></a>
@@ -43,7 +43,7 @@
 <span class="sourceLineNo">035</span>    {<a name="line.35"></a>
 <span class="sourceLineNo">036</span>        return this.aCommandWord;<a name="line.36"></a>
 <span class="sourceLineNo">037</span>    }   <a name="line.37"></a>
-<span class="sourceLineNo">038</span>    <a name="line.38"></a>
+<span class="sourceLineNo">038</span><a name="line.38"></a>
 <span class="sourceLineNo">039</span>    /**<a name="line.39"></a>
 <span class="sourceLineNo">040</span>     * Return the second word of this command. Returns null if there was no<a name="line.40"></a>
 <span class="sourceLineNo">041</span>     * second word.<a name="line.41"></a>
@@ -54,35 +54,24 @@
 <span class="sourceLineNo">046</span>    {<a name="line.46"></a>
 <span class="sourceLineNo">047</span>        return this.aSecondWord; <a name="line.47"></a>
 <span class="sourceLineNo">048</span>    }  <a name="line.48"></a>
-<span class="sourceLineNo">049</span>    <a name="line.49"></a>
-<span class="sourceLineNo">050</span>    /**<a name="line.50"></a>
-<span class="sourceLineNo">051</span>     * @return true if the command has a second word.<a name="line.51"></a>
-<span class="sourceLineNo">052</span>     */<a name="line.52"></a>
-<span class="sourceLineNo">053</span>    public boolean hasSecondWord ()<a name="line.53"></a>
-<span class="sourceLineNo">054</span>    {<a name="line.54"></a>
-<span class="sourceLineNo">055</span>        /*boolean vHasSecondWord = true;<a name="line.55"></a>
-<span class="sourceLineNo">056</span>        if (this.aSecondWord == null)  <a name="line.56"></a>
-<span class="sourceLineNo">057</span>        {<a name="line.57"></a>
-<span class="sourceLineNo">058</span>            vHasSecondWord = false;<a name="line.58"></a>
-<span class="sourceLineNo">059</span>        }   <a name="line.59"></a>
-<span class="sourceLineNo">060</span>        return vHasSecondWord; */<a name="line.60"></a>
-<span class="sourceLineNo">061</span>        return (aSecondWord != null);<a name="line.61"></a>
-<span class="sourceLineNo">062</span>    } //hasSecondWord()<a name="line.62"></a>
-<span class="sourceLineNo">063</span>    <a name="line.63"></a>
-<span class="sourceLineNo">064</span>    /**<a name="line.64"></a>
-<span class="sourceLineNo">065</span>     * @return true if this command was not understood.<a name="line.65"></a>
-<span class="sourceLineNo">066</span>     */<a name="line.66"></a>
-<span class="sourceLineNo">067</span>    public boolean isUnknown () <a name="line.67"></a>
-<span class="sourceLineNo">068</span>    {<a name="line.68"></a>
-<span class="sourceLineNo">069</span>        /*boolean vIsUnknown = false;<a name="line.69"></a>
-<span class="sourceLineNo">070</span>        if (this.aCommandWord == null) <a name="line.70"></a>
-<span class="sourceLineNo">071</span>        {<a name="line.71"></a>
-<span class="sourceLineNo">072</span>            vIsUnknown = true;<a name="line.72"></a>
-<span class="sourceLineNo">073</span>        }    <a name="line.73"></a>
-<span class="sourceLineNo">074</span>        return vIsUnknown;*/<a name="line.74"></a>
-<span class="sourceLineNo">075</span>        return (aCommandWord == null);<a name="line.75"></a>
-<span class="sourceLineNo">076</span>    } //isUnkown()  <a name="line.76"></a>
-<span class="sourceLineNo">077</span>} // Command <a name="line.77"></a>
+<span class="sourceLineNo">049</span><a name="line.49"></a>
+<span class="sourceLineNo">050</span>    // ## Methodes ##<a name="line.50"></a>
+<span class="sourceLineNo">051</span>    /**<a name="line.51"></a>
+<span class="sourceLineNo">052</span>     * @return true if the command has a second word.<a name="line.52"></a>
+<span class="sourceLineNo">053</span>     */<a name="line.53"></a>
+<span class="sourceLineNo">054</span>    public boolean hasSecondWord ()<a name="line.54"></a>
+<span class="sourceLineNo">055</span>    {<a name="line.55"></a>
+<span class="sourceLineNo">056</span>        return (aSecondWord != null);<a name="line.56"></a>
+<span class="sourceLineNo">057</span>    } //hasSecondWord()<a name="line.57"></a>
+<span class="sourceLineNo">058</span><a name="line.58"></a>
+<span class="sourceLineNo">059</span>    /**<a name="line.59"></a>
+<span class="sourceLineNo">060</span>     * @return true if this command was not understood.<a name="line.60"></a>
+<span class="sourceLineNo">061</span>     */<a name="line.61"></a>
+<span class="sourceLineNo">062</span>    public boolean isUnknown () <a name="line.62"></a>
+<span class="sourceLineNo">063</span>    {<a name="line.63"></a>
+<span class="sourceLineNo">064</span>        return (aCommandWord == null);<a name="line.64"></a>
+<span class="sourceLineNo">065</span>    } //isUnkown()  <a name="line.65"></a>
+<span class="sourceLineNo">066</span>} // Command <a name="line.66"></a>
 
 
 

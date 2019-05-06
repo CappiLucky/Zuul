@@ -5,12 +5,13 @@ import java.net.URL;
 import java.awt.image.*;
 
 /**
+ *  Project Zuul
  * This class implements a simple graphical user interface with a text entry
  * area, a text output area and an optional image.
  * 
  * @author Michael Kolling (DB edited)
  * @author modified by Manon HERMANN    
- * @version 1
+ * @version v1
  */
 public class UserInterface implements ActionListener
 {

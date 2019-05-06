@@ -1,5 +1,4 @@
 import java.util.StringTokenizer;
-// import java.util.Scanner;
 
 /**
  * This class is part of the "World of Zuul" application. 
@@ -18,7 +17,7 @@ import java.util.StringTokenizer;
  * @version 2008.03.30 + 2013.09.15
  * 
  * @author modified by Manon HERMANN 
- * @version modified on 2019
+ * @version v1
  */
 public class Parser 
 {
@@ -35,6 +34,7 @@ public class Parser
         // System.in designe le clavier, comme System.out designe l'ecran
     } // Parser()
 
+    // ## Accesseurs ##
     /**
      * @return The next command from the user.
      * @param pInputLine ligne a implementer
@@ -60,7 +60,7 @@ public class Parser
                 // note : on ignore tout le reste de la ligne tapee !
             } else vWord2 = null;
             
-        // Veifie si le premier mot est une commande connue. Si oui, cree une Command avec.
+        // Verifie si le premier mot est une commande connue. Si oui, cree une Command avec.
         // Sinon, cree une commande vide avec "null" (pour dire 'commande inconnue').
         if ( this.aValidCommands.isCommand( vWord1 ) ) {
             return new Command( vWord1, vWord2 );
@@ -69,7 +69,8 @@ public class Parser
             return new Command( null, vWord2 ); 
         }
     } // getCommand()
-    
+
+    // ## Methodes ##
     /**
      * @return a String with valid command words
      */

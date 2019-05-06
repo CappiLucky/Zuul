@@ -1,4 +1,3 @@
-
 /**
  * Project Zuul
  * Class for create differents items
@@ -15,6 +14,7 @@ public class Item
     /**
      * Constructeur d'objets de classe Items
      * 
+     * @param pName nom de l'objet
      * @param pDescr description de l'objet
      * @param pWeight poids de l'objet
      */
@@ -25,13 +25,16 @@ public class Item
         this.aWeight = pWeight;
     }// construteur par defaut (...)
 
+    // ## Accesseurs ##
     /**
+     * accesseur pour le nom de l'objet
+     * 
      * @return name of the object
      */
     public String getName()
     {
         return this.aName;
-    }
+    } //getName()
 
     /**
      * Return objet'description
@@ -41,7 +44,7 @@ public class Item
     public String getDescription()
     {
         return this.aDescription;
-    }
+    } //getDescription()
 
     /**
      * Return objet'weight
@@ -51,7 +54,7 @@ public class Item
     public int getWeight()
     {
         return this.aWeight;
-    }
+    } //getWeight()
 
     /**
      * Return objet'description and objet'weight
@@ -60,6 +63,6 @@ public class Item
      */
     public String getItemInformation()
     {
-        return this.aDescription + " whose have the weight of " + this.aWeight;
-    }
-}
+        return this.getName() + " : " + this.aDescription + " whose have the weight of " + this.aWeight;
+    } //getItemInformation()
+} //Item

@@ -1,4 +1,3 @@
-
 /**
  * Project Zuul
  * Class for capture words
@@ -10,7 +9,7 @@ public class Command
 {
     private String aCommandWord;
     private String aSecondWord;
-    
+
     /**
      * Create a command object. First and second word must be supplied, but
      * either one (or both) can be null. The command word should be null to
@@ -25,6 +24,7 @@ public class Command
         this.aSecondWord = pSecondWord;
     } //Command(..) 
     
+    // ## Accesseurs ##
     /**
      * Return the command word (the first word) of this command. If the
      * command was not understood, the result is null.
@@ -35,7 +35,7 @@ public class Command
     {
         return this.aCommandWord;
     }   
-    
+
     /**
      * Return the second word of this command. Returns null if there was no
      * second word.
@@ -46,32 +46,21 @@ public class Command
     {
         return this.aSecondWord; 
     }  
-    
+
+    // ## Methodes ##
     /**
      * @return true if the command has a second word.
      */
     public boolean hasSecondWord ()
     {
-        /*boolean vHasSecondWord = true;
-        if (this.aSecondWord == null)  
-        {
-            vHasSecondWord = false;
-        }   
-        return vHasSecondWord; */
         return (aSecondWord != null);
     } //hasSecondWord()
-    
+
     /**
      * @return true if this command was not understood.
      */
     public boolean isUnknown () 
     {
-        /*boolean vIsUnknown = false;
-        if (this.aCommandWord == null) 
-        {
-            vIsUnknown = true;
-        }    
-        return vIsUnknown;*/
         return (aCommandWord == null);
     } //isUnkown()  
 } // Command 
