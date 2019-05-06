@@ -1,6 +1,0 @@
-go West
-go South
-look
-go North
-go West
-help

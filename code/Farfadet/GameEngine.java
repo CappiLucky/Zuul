@@ -19,7 +19,7 @@ public class GameEngine
     private UserInterface aGui;
     public HashMap <Room, String> aRoomsHM; //HashMap reliant les Rooms et leur nom
     private Player aPlayer;
-    //stoker une collection de joueur
+    private int aTimer = 30; 
 
     /**
      * Constructor for objects of class GameEngine
@@ -28,7 +28,6 @@ public class GameEngine
     {
         aParser = new Parser();
         aRoomsHM = new HashMap <Room, String> (); 
-        
         createRooms();
     }
 
@@ -40,30 +39,29 @@ public class GameEngine
     public void setGUI(UserInterface pUserInterface)
     {
         this.aGui = pUserInterface;
-        this.aPlayer.setGui(aGui); //lui dire qu'une Interface du joueur existe
+        this.aPlayer.setGui(aGui); //dire qu'une Interface du joueur existe
         aPlayer.printWelcome();
     }
 
-    //printwelcome dans player
-
+    
     /**
      * Create Room of the game with his descriptions and exits 
      */
     private void createRooms ()
     {
         //declaration des Items 
-        Item vIPiece1 = new Item ("gold coin", "gold coin number 1", 1);
-        Item vIPiece2 = new Item ("gold coin", "gold coin number 2", 1);
-        Item vIPiece3 = new Item ("gold coin", "gold coin number 3", 1);
-        Item vIPiece4 = new Item ("gold coin", "gold coin number 4", 1);
-        Item vIPiece5 = new Item ("gold coin", "gold coin number 5", 1);
-        Item vIEau = new Item ("cup of water", "cup of water which going to the big water cascade", 1);
-        Item vILivre = new Item ("magik book", "magik and ancient book with many secrets", 1);
+        Item vIPiece1 = new Item ("goldCoin", "gold coin number 1", 1);
+        Item vIPiece2 = new Item ("goldCoin", "gold coin number 2", 1);
+        Item vIPiece3 = new Item ("goldCoin", "gold coin number 3", 1);
+        Item vIPiece4 = new Item ("goldCoin", "gold coin number 4", 1);
+        Item vIPiece5 = new Item ("goldCoin", "gold coin number 5", 1);
+        Item vIEau = new Item ("water", "cup of water which going to the big water cascade", 1);
+        Item vILivre = new Item ("magicBook", "magic and ancient book with many secrets", 1);
         Item vIChampi = new Item ("mushrooms", "good mushrooms for the great clearing", 1);
         Item vIClef = new Item ("key", "claudron'key", 1);
         Item vIChaudron = new Item ("claudron", "contains the gold coin", 20);
         Item vIFleur = new Item ("flower", "flower, is nothing else", 1);
-        Item vMagikCookie = new Item ("magik cookie", "upgrade your storage", 0);
+        Item vMagikCookie = new Item ("magicCookie", "upgrade your storage", 0);
 
         //declaration des variables Room
         Room vChaudron = new Room (" at the foot of the rainbow", "images/chaudron_dor2.jpg"); //endroit ou il faut ramener les 5pieces
@@ -85,7 +83,7 @@ public class GameEngine
         vClairiere.setExits ("South", vArbre);
         vClairiere.setExits ("West", vPiece);
         vFee.setExits ("North", vCascade);
-        vFee.setExits ("South", vClairiere);
+            //vFee.setExits ("South", vClairiere); --> trap door
         vCascade.setExits ("South", vFee);
         vCascade.setExits ("West", vElfe);
         vElfe.setExits ("North", vCascade);
@@ -103,12 +101,12 @@ public class GameEngine
         vChaudron.addItem ("claudron", vIChaudron);
         vClairiere.addItem ("mushrooms", vIChampi);
         vCascade.addItem ("water", vIEau);
-        vPiece.addItem ("gold coin number 1", vIPiece1);
-        vLivre.addItem ("magik book", vILivre);
+        vPiece.addItem ("goldCoin", vIPiece1);
+        vLivre.addItem ("magicBook", vILivre);
         vLivre.addItem ("flower", vIFleur);
+        vLivre.addItem ("magicCookie", vMagikCookie);
 
         //initialiser le lieu de depart
-        //this.aCurrentRoom = vChaudron;
         this.aPlayer = new Player ("Farfadet", vChaudron);
 
         //initialisation de la aRoomsHM
@@ -155,7 +153,9 @@ public class GameEngine
         else if (commandWord.equals("look"))
             aPlayer.look();
         else if (commandWord.equals("eat"))
-            aPlayer.eat();
+            if(!command.hasSecondWord())
+                aGui.println("Eat what?");
+            else aPlayer.eat(command.getSecondWord()); 
         else if (commandWord.equals("back"))
             aPlayer.back();
         else if (commandWord.equals("test")) {
@@ -202,13 +202,20 @@ public class GameEngine
 
         //try to leave current room
         Room vNextRoom = aPlayer.getCurrentRoom().getExit(vDirection);
-
         if (vNextRoom == null)
         {
             aGui.println ("There is no door !");
         } else {
             aPlayer.getStackRoom().push (aPlayer.getCurrentRoom());
             aPlayer.changeRoom(vNextRoom);
+            if (aTimer == 0) {
+                aGui.println("!! time is over !!");
+                endGame();
+            }
+            else {
+                aTimer -= 1;
+                aGui.println("You have " + aTimer + "moves even");
+            }
         }    
     } //procedure goRoom() 
 
@@ -222,12 +229,7 @@ public class GameEngine
     } 
 
     //autres fonctions
-    //eat et look deplacer dans player
 
-    
-    //printlocationinfo dans player
-
-    //non obligatoire (?)
     /**
      * Command to quit game
      * 

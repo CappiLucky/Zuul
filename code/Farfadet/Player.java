@@ -43,7 +43,7 @@ public class Player
     public int getPoidMax () {
         return this.aPoidsMax;
     }
-    
+
     /**
      * Accesseur pour le nom du personnage
      * 
@@ -102,20 +102,20 @@ public class Player
      * 
      * @param pNomItem nom de l'item
      */
-     public void takeItem (final Command pCommand) {
-         String vDescr = pCommand.getSecondWord();
-         Item vItem = this.aCurrentRoom.aItemHM.get(vDescr);
-         if (vItem == null) 
-             aGui.println ("this object do not exist");
-         else if (this.aPoidsMax < this.aInventory.getTotalWeight() + vItem.getWeight())
-             aGui.println ("your inventory is too heavy");
-         else {
-             this.aInventory.addItem(vDescr, vItem);
-             this.aCurrentRoom.aItemHM.remove(vDescr, vItem);
-             this.aGui.println (this.aInventory.getItemsString());
-         }
-     } //takeItem(.)
-  
+    public void takeItem (final Command pCommand) {
+        String vDescr = pCommand.getSecondWord();
+        Item vItem = this.aCurrentRoom.aItemHM.get(vDescr);
+        if (vItem == null) 
+            aGui.println ("this object do not exist");
+        else if (this.aPoidsMax < this.aInventory.getTotalWeight() + vItem.getWeight())
+            aGui.println ("your inventory is too heavy");
+        else {
+            this.aInventory.addItem(vDescr, vItem);
+            this.aCurrentRoom.aItemHM.remove(vDescr, vItem);
+            this.aGui.println (this.aInventory.getItemsString());
+        }
+    } //takeItem(.)
+
     /**
      * Methode for drop a item in currentRoom
      * 
@@ -123,7 +123,7 @@ public class Player
      */
     public void dropItem (final Command pCommand) {
         String vDescr = pCommand.getSecondWord();
-        Item vItem = this.aCurrentRoom.aItemHM.get(vDescr);
+        Item vItem = this.aInventory.aInventoryHM.get(vDescr);
         if (vItem == null)
             aGui.println ("can't drop this object");
         else {
@@ -132,7 +132,7 @@ public class Player
         }
         this.aGui.println (this.aInventory.getItemsString());
     } //dropItem(.)     
-  
+
     /**
      * Allow you to look around you
      */
@@ -144,9 +144,15 @@ public class Player
     /**
      * Allow you to eat something
      */
-    public void eat ()
+    public void eat (final String pCommand)
     {
-        this.aGui.println ("You have eaten now and you are not hungry any more.");
+        Item vItem = this.aInventory.aInventoryHM.get(pCommand);
+        if (pCommand.equals("magicCookie") && this.aInventory.aInventoryHM.containsValue(vItem)) {
+            this.aPoidsMax = aPoidsMax*2;
+            this.aGui.println ("You eat the Magic Cookie, you increases inventory'weight");
+            aInventory.removeItem(pCommand, vItem);
+        }
+        else this.aGui.println ("You can't eat that");
     } //eat() 
 
     /**

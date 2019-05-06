@@ -1,0 +1,27 @@
+go West
+take mushrooms
+go South
+go East
+take magicCookie
+eat magicCookie
+look
+take magicBook
+go West
+go North
+go West
+take goldCoin
+go Up
+drop mushrooms
+go Down
+go North
+drop magicBook
+go North
+take water
+go South
+go South
+go South
+drop water
+go North
+go East
+drop goldCoin
+go East
