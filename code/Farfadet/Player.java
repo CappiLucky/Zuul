@@ -30,9 +30,9 @@ public class Player
         this.aInventory = new ItemList ();
     } //constructeur par defaut de player
 
-    // ## accesseurs ##
+    // ## Accesseurs ##
     /**
-     * Accesseur pour la salle courante
+     * Accesseur of the current room
      * 
      * @return String de la salle
      */
@@ -40,12 +40,15 @@ public class Player
         return this.aCurrentRoom;
     } //getCurrentRoom()
 
+    /**
+     * @return int which is the ttale weight of the inventory
+     */
     public int getPoidMax () {
         return this.aPoidsMax;
-    }
+    } //getPoidMax()
 
     /**
-     * Accesseur pour le nom du personnage
+     * Accesseur for the player
      * 
      * @return String du nom
      */
@@ -80,13 +83,16 @@ public class Player
         this.aGui = pUserInterface;
     } //setGui(.)
 
+    /**
+     * @return Stack of the precedent room
+     */
     public Stack <Room> getStackRoom(){
         return this.aAntRoom;
-    }
+    } //getStackRoom()
 
-    // ## methodes ##
+    // ## Methodes ##
     /**
-     * Methode for chane room
+     * Methode for change room
      * 
      * @param pRoom pour indiquer la salle suivante
      */
@@ -100,7 +106,7 @@ public class Player
     /**
      * Methode for take a item in currentRoom
      * 
-     * @param pNomItem nom de l'item
+     * @param pCommand command of the item which you want to take
      */
     public void takeItem (final Command pCommand) {
         String vDescr = pCommand.getSecondWord();
@@ -119,7 +125,7 @@ public class Player
     /**
      * Methode for drop a item in currentRoom
      * 
-     * @param pNomItem nom de l'item
+     * @param pCommand command of the item which you want to drop
      */
     public void dropItem (final Command pCommand) {
         String vDescr = pCommand.getSecondWord();
@@ -143,6 +149,8 @@ public class Player
 
     /**
      * Allow you to eat something
+     * 
+     * @param pCommand what you want to eat
      */
     public void eat (final String pCommand)
     {
@@ -153,7 +161,7 @@ public class Player
             aInventory.removeItem(pCommand, vItem);
         }
         else this.aGui.println ("You can't eat that");
-    } //eat() 
+    } //eat(.) 
 
     /**
      * Allow you to go back

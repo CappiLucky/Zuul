@@ -31,6 +31,7 @@ public class GameEngine
         createRooms();
     }
 
+    // ## Accesseurs ##
     /**
      * Create interface of the user
      * 
@@ -43,18 +44,18 @@ public class GameEngine
         aPlayer.printWelcome();
     }
 
-    
+    // ## Methodes ##
     /**
      * Create Room of the game with his descriptions and exits 
      */
     private void createRooms ()
     {
         //declaration des Items 
-        Item vIPiece1 = new Item ("goldCoin", "gold coin number 1", 1);
-        Item vIPiece2 = new Item ("goldCoin", "gold coin number 2", 1);
-        Item vIPiece3 = new Item ("goldCoin", "gold coin number 3", 1);
-        Item vIPiece4 = new Item ("goldCoin", "gold coin number 4", 1);
-        Item vIPiece5 = new Item ("goldCoin", "gold coin number 5", 1);
+        Item vIPiece1 = new Item ("goldCoin1", "gold coin number 1", 1);
+        Item vIPiece2 = new Item ("goldCoin2", "gold coin number 2", 1);
+        Item vIPiece3 = new Item ("goldCoin2", "gold coin number 3", 1);
+        Item vIPiece4 = new Item ("goldCoin2", "gold coin number 4", 1);
+        Item vIPiece5 = new Item ("goldCoin2", "gold coin number 5", 1);
         Item vIEau = new Item ("water", "cup of water which going to the big water cascade", 1);
         Item vILivre = new Item ("magicBook", "magic and ancient book with many secrets", 1);
         Item vIChampi = new Item ("mushrooms", "good mushrooms for the great clearing", 1);
@@ -83,7 +84,7 @@ public class GameEngine
         vClairiere.setExits ("South", vArbre);
         vClairiere.setExits ("West", vPiece);
         vFee.setExits ("North", vCascade);
-            //vFee.setExits ("South", vClairiere); --> trap door
+        vFee.setExits ("South", vClairiere); //--> trap door
         vCascade.setExits ("South", vFee);
         vCascade.setExits ("West", vElfe);
         vElfe.setExits ("North", vCascade);
@@ -97,11 +98,20 @@ public class GameEngine
         vLivre.setExits ("West", vArbre);
         vSorciere.setExits ("West", vChaudron);
 
+        //creation des TrapDoor et LockDoor
+        Door vSecretDoor = new Door (false, true, true);
+        Door vFCdoor = new Door (true, false, false);
+        Door vCFdoor = new Door (true, false, true);
+        //lien entre les salles et les Doors
+        vChaudron.setDoor ("East", vSecretDoor);
+        vFee.setDoor ("North", vFCdoor);
+        vCascade.setDoor ("South", vCFdoor);
+
         //ajout des item dans les rooms
         vChaudron.addItem ("claudron", vIChaudron);
         vClairiere.addItem ("mushrooms", vIChampi);
         vCascade.addItem ("water", vIEau);
-        vPiece.addItem ("goldCoin", vIPiece1);
+        vPiece.addItem ("goldCoin1", vIPiece1);
         vLivre.addItem ("magicBook", vILivre);
         vLivre.addItem ("flower", vIFleur);
         vLivre.addItem ("magicCookie", vMagikCookie);
@@ -172,7 +182,7 @@ public class GameEngine
         else if (commandWord.equals("inventory"))
             this.aGui.println (this.aPlayer.getInventory().inventory());
     }
-    
+
     /**
      * The help text when you write "help"
      */
@@ -199,24 +209,44 @@ public class GameEngine
             return;
         }
         String vDirection = pCommand.getSecondWord();
-
         //try to leave current room
         Room vNextRoom = aPlayer.getCurrentRoom().getExit(vDirection);
         if (vNextRoom == null)
         {
             aGui.println ("There is no door !");
-        } else {
-            aPlayer.getStackRoom().push (aPlayer.getCurrentRoom());
-            aPlayer.changeRoom(vNextRoom);
-            if (aTimer == 0) {
-                aGui.println("!! time is over !!");
-                endGame();
+            return;
+        }
+        //cas du trapDoor et lockDoor
+        Door vNextDoor = this.aPlayer.getCurrentRoom().getDoor(vDirection);
+        if (vNextDoor != null) {
+            if (this.aPlayer.getCurrentRoom().getDoor(vDirection).isTrapDoor()) {
+                if (! vNextDoor.canGo()) {
+                    aGui.println ("this door is a trap. You can't go in this direction");
+                    return;
+                } 
+                this.aPlayer.getStackRoom().clear();
+            } else if (this.aPlayer.getCurrentRoom().getDoor(vDirection).isLockDoor()) {
+                HashMap vInvtHM = this.aPlayer.getInventory().aInventoryHM;
+                if (vInvtHM.containsKey("goldCoin1") && vInvtHM.containsKey("goldCoin") && vInvtHM.containsKey("goldCoin3") && vInvtHM.containsKey("goldCoin4") && vInvtHM.containsKey("goldCoin5")) {
+                    vNextDoor.setLock(false);
+                    aGui.println ("Amazing ! You found a secret room...");
+                } else {
+                    aGui.println ("You can't open the door ! You have to take the 5 gold coin");
+                    return;
+                }
             }
-            else {
-                aTimer -= 1;
-                aGui.println("You have " + aTimer + "moves even");
-            }
-        }    
+        }
+
+        aPlayer.getStackRoom().push (aPlayer.getCurrentRoom());
+        aPlayer.changeRoom(vNextRoom);
+        if (aTimer == 0) {
+            aGui.println("!! time is over !!");
+            endGame();
+        }
+        else {
+            aTimer -= 1;
+            aGui.println("You have " + aTimer + "moves even");
+        }
     } //procedure goRoom() 
 
     /**
@@ -226,10 +256,9 @@ public class GameEngine
     {
         aGui.println("Thank you for playing.  Good bye.");
         aGui.enable(false);
-    } 
+    } //endGame()
 
     //autres fonctions
-
     /**
      * Command to quit game
      * 
@@ -248,6 +277,9 @@ public class GameEngine
         }
     } //quit() 
 
+    /**
+     * @param pNom name of the text
+     */
     private void test (final String pNom) {
         Scanner vS;
         try {
@@ -263,5 +295,5 @@ public class GameEngine
         catch (final Exception pErr) {
             this.aGui.println ("Erreur : " + pErr.getMessage() );
         }
-    }
+    } //test(.)
 }

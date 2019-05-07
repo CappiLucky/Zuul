@@ -22,8 +22,8 @@ public class ItemList
     /**
      * Accesseur pour avoir l'item
      * 
-     * @return Item item quon voulait avoir
-     * @param pItem item en question
+     * @return Item item who want
+     * @param pItem item 
      */
     public Item getItem (final String pItem) {
         return this.aInventoryHM.get(pItem);
@@ -79,16 +79,25 @@ public class ItemList
     } //getTotalWeight()
 
     // ## Methodes ##
+    /**
+     * @param pName name of the object which want to remove
+     * @param pItem item which want to remove
+     */
     public void removeItem (final String pName, final Item pItem){
         this.aInventoryHM.remove(pName, pItem);
-    } //removeItem(.)
+    } //removeItem(..)
 
+    /**
+     * @param pName name of the object which want to add
+     * @param pItem item which want to remove
+     */
     public void addItem (final String pName, final Item pItem) {
         this.aInventoryHM.put(pName, pItem);
     } //addItem(..)
     
     /**
      * Permet de savoir si un item existe
+     * 
      * @param pName Nom auquel est associé l'item
      * @return boolean true si l'item est dans la liste
      */
@@ -96,6 +105,9 @@ public class ItemList
         return this.aInventoryHM.containsKey (pName);
     } //containsKey(.)
     
+    /**
+     * @return String which contains informations of the inventory
+     */
     public String inventory () {
         return this.getItemsString() + "\n" + "and total weight : " + this.getTotalWeight() + "\n";
     }//inventory()

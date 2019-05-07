@@ -13,6 +13,7 @@ public class Room
 {
     public HashMap <String, Room> aExitHM; //HashMap reliant les room et leur sortie
     public HashMap <String, Item> aItemHM; //HashMap reliant les room et leur item
+    public HashMap <String, Door> aDoorHM; 
     private String aDescription; 
     private String aImageName;
 
@@ -29,6 +30,7 @@ public class Room
         this.aDescription = pDescription;
         aExitHM = new HashMap <String, Room> ();
         aItemHM = new HashMap <String, Item> ();
+        aDoorHM = new HashMap <String, Door> ();
         this.aImageName = pImage;
     } //Room(..)
 
@@ -109,6 +111,9 @@ public class Room
         return aImageName;
     } //getImageName()
 
+    /**
+     * @return a String with all object in the inventory of player
+     */
     public String getItemString () {
         String vReturnString = "Objects :";
         Set<String> vKeys = this.aItemHM.keySet();
@@ -118,12 +123,35 @@ public class Room
         return vReturnString;
     } //getItemString()
 
+    /**
+     * @param pDir wish direction
+     * @param pDoor name of the door
+     */
+    public void setDoor (final String pDir, final Door pDoor) {
+        this.aDoorHM.put(pDir, pDoor);
+    } //setDoor(..)
+    
+    /**
+     * @return Door in the direction
+     * @param pDir wish' direction 
+     */
+    public Door getDoor (final String pDir) {
+        return this.aDoorHM.get(pDir);
+    } //getDoord(.)
+    
     // ## Methodes ##
+    /**
+     * @param pName name of the item
+     * @param pItem Item which we want to add
+     */
     public void addItem (final String pName, final Item pItem) {
         this.aItemHM.put(pName, pItem);
     } //adItem(..)
     
-    public void removeItem (final  String pName) {
+    /**
+     * @param pName name of the item which we want to remove
+     */
+    public void removeItem (final String pName) {
         this.aItemHM.remove(pName);
     } //removeItem(..)
 }// Room
