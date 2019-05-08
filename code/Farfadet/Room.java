@@ -28,9 +28,9 @@ public class Room
     public Room (final String pDescription, final String pImage) 
     {
         this.aDescription = pDescription;
-        aExitHM = new HashMap <String, Room> ();
-        aItemHM = new HashMap <String, Item> ();
-        aDoorHM = new HashMap <String, Door> ();
+        this.aExitHM = new HashMap <String, Room> ();
+        this.aItemHM = new HashMap <String, Item> ();
+        this.aDoorHM = new HashMap <String, Door> ();
         this.aImageName = pImage;
     } //Room(..)
 
@@ -54,11 +54,11 @@ public class Room
     public String getLongDescription()
     { 
         if (this.aItemHM.isEmpty()) {
-            return ("\n" + "You are " + this.aDescription + ".\n" + getExitString());
+            return ("\n" + "You are " + this.aDescription + ".\n" + this.getExitString());
         } else {
             return ("\n" + "You are " + this.aDescription + ".\n" 
                 + this.getItemString() + ".\n" 
-                + getExitString() );
+                + this.getExitString() );
         }
     } //getLongDescription()
 
@@ -83,7 +83,7 @@ public class Room
      */
     public Room getExit (String pDirection)
     {
-        return aExitHM.get(pDirection);
+        return this.aExitHM.get(pDirection);
     } //getExit(.)
 
     /**
@@ -95,7 +95,7 @@ public class Room
     public String getExitString() 
     {
         String vExit = "Exits : ";
-        Set<String> keys = aExitHM.keySet();
+        Set<String> keys = this.aExitHM.keySet();
         for (String aExitHM : keys ) 
         {
             vExit += ' ' + aExitHM; 
@@ -108,7 +108,7 @@ public class Room
      */
     public String getImageName() 
     {
-        return aImageName;
+        return this.aImageName;
     } //getImageName()
 
     /**
@@ -118,7 +118,7 @@ public class Room
         String vReturnString = "Objects :";
         Set<String> vKeys = this.aItemHM.keySet();
         for (String vItem : vKeys) {
-            vReturnString += "\n" + aItemHM.get(vItem).getItemInformation();
+            vReturnString += "\n" + this.aItemHM.get(vItem).getItemInformation();
         }
         return vReturnString;
     } //getItemString()

@@ -153,11 +153,11 @@ public class UserInterface implements ActionListener
         // there is only one possible action: text entry
         Object vSource=pE.getSource();
         if (vSource==aButtonHelp){
-            aEngine.interpretCommand("help");
+            this.aEngine.interpretCommand("help");
         } else if (vSource==aButtonLook) {
-            aEngine.interpretCommand("look");
+            this.aEngine.interpretCommand("look");
         } else if (vSource==aButtonBack) {
-            aEngine.interpretCommand("back");
+            this.aEngine.interpretCommand("back");
         } 
         else this.processCommand();
     } // actionPerformed(.)

@@ -16,8 +16,8 @@ public class Game
      */
     public Game() 
     {
-       aEngine = new GameEngine();
-       aGui = new UserInterface(aEngine);
-       aEngine.setGUI(aGui);
+       this.aEngine = new GameEngine();
+       this.aGui = new UserInterface(aEngine);
+       this.aEngine.setGUI(aGui);
     } //contructeur par defaut : Game()  
 } // Game

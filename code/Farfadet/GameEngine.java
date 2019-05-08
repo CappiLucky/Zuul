@@ -26,9 +26,9 @@ public class GameEngine
      */
     public GameEngine()
     {
-        aParser = new Parser();
-        aRoomsHM = new HashMap <Room, String> (); 
-        createRooms();
+        this.aParser = new Parser();
+        this.aRoomsHM = new HashMap <Room, String> (); 
+        this.createRooms();
     }
 
     // ## Accesseurs ##
@@ -41,7 +41,7 @@ public class GameEngine
     {
         this.aGui = pUserInterface;
         this.aPlayer.setGui(aGui); //dire qu'une Interface du joueur existe
-        aPlayer.printWelcome();
+        this.aPlayer.printWelcome();
     }
 
     // ## Methodes ##
@@ -141,44 +141,44 @@ public class GameEngine
      */
     public void interpretCommand(String pCommandLine) 
     {
-        aGui.println ("*****************************************");
-        aGui.println("Your command is : " + pCommandLine);
-        Command command = aParser.getCommand(pCommandLine);
+        this.aGui.println ("*****************************************");
+        this.aGui.println("Your command is : " + pCommandLine);
+        Command command = this.aParser.getCommand(pCommandLine);
         if(command.isUnknown()) {
-            aGui.println("I don't know what you mean...");
+            this.aGui.println("I don't know what you mean...");
             return;
         }
 
         String commandWord = command.getCommandWord();
         if (commandWord.equals("help"))
-            printHelp();
+            this.printHelp();
         else if (commandWord.equals("go"))
-            goRoom(command);
+            this.goRoom(command);
         else if (commandWord.equals("quit")) {
             if(command.hasSecondWord())
-                aGui.println("Quit what?");
+                this.aGui.println("Quit what?");
             else
-                endGame();
+                this.endGame();
         } 
         else if (commandWord.equals("look"))
-            aPlayer.look();
+            this.aPlayer.look();
         else if (commandWord.equals("eat"))
             if(!command.hasSecondWord())
-                aGui.println("Eat what?");
-            else aPlayer.eat(command.getSecondWord()); 
+                this.aGui.println("Eat what?");
+            else this.aPlayer.eat(command.getSecondWord()); 
         else if (commandWord.equals("back"))
-            aPlayer.back();
+            this.aPlayer.back();
         else if (commandWord.equals("test")) {
             if (command.hasSecondWord())
-                test(command.getSecondWord());
+                this.test(command.getSecondWord());
         }
         else if (commandWord.equals("take"))
             if (!command.hasSecondWord()) 
                 this.aGui.println ("Take what ? \n");
             else 
-                aPlayer.takeItem(command);
+                this.aPlayer.takeItem(command);
         else if (commandWord.equals("drop"))
-            aPlayer.dropItem(command);  
+            this.aPlayer.dropItem(command);  
         else if (commandWord.equals("inventory"))
             this.aGui.println (this.aPlayer.getInventory().inventory());
     }
@@ -188,12 +188,12 @@ public class GameEngine
      */
     private void printHelp ()
     {
-        aGui.println("You are lost.");
-        aGui.println("You can refer to the map");
-        aGui.println("Your maximal weight is " + this.aPlayer.getPoidMax());
-        aGui.println("\n");
-        aGui.println("Your command words are:");
-        aGui.println(aParser.showCommands());
+        this.aGui.println("You are lost.");
+        this.aGui.println("You can refer to the map");
+        this.aGui.println("Your maximal weight is " + this.aPlayer.getPoidMax());
+        this.aGui.println("\n");
+        this.aGui.println("Your command words are:");
+        this.aGui.println(this.aParser.showCommands());
     } //printHelp()
 
     /**
@@ -201,51 +201,52 @@ public class GameEngine
      * 
      * @param pCommand The word which has writting
      */
-    private void goRoom (final Command pCommand)
+    private void goRoom (final Command pCommand) 
     {
         if(!pCommand.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            aGui.println("Go where?");
+            this.aGui.println("Go where?");
             return;
         }
         String vDirection = pCommand.getSecondWord();
         //try to leave current room
-        Room vNextRoom = aPlayer.getCurrentRoom().getExit(vDirection);
+        Room vNextRoom = this.aPlayer.getCurrentRoom().getExit(vDirection);
         if (vNextRoom == null)
         {
-            aGui.println ("There is no door !");
+            this.aGui.println ("There is no door !");
             return;
         }
+        this.aPlayer.getStackRoom().push (this.aPlayer.getCurrentRoom());
+        
         //cas du trapDoor et lockDoor
         Door vNextDoor = this.aPlayer.getCurrentRoom().getDoor(vDirection);
         if (vNextDoor != null) {
             if (this.aPlayer.getCurrentRoom().getDoor(vDirection).isTrapDoor()) {
                 if (! vNextDoor.canGo()) {
-                    aGui.println ("this door is a trap. You can't go in this direction");
+                    this.aGui.println ("this door is a trap. You can't go in this direction");
                     return;
                 } 
-                this.aPlayer.getStackRoom().clear();
+                this.aPlayer.clearStack();
             } else if (this.aPlayer.getCurrentRoom().getDoor(vDirection).isLockDoor()) {
                 HashMap vInvtHM = this.aPlayer.getInventory().aInventoryHM;
                 if (vInvtHM.containsKey("goldCoin1") && vInvtHM.containsKey("goldCoin") && vInvtHM.containsKey("goldCoin3") && vInvtHM.containsKey("goldCoin4") && vInvtHM.containsKey("goldCoin5")) {
                     vNextDoor.setLock(false);
-                    aGui.println ("Amazing ! You found a secret room...");
+                    this.aGui.println ("Amazing ! You found a secret room...");
                 } else {
-                    aGui.println ("You can't open the door ! You have to take the 5 gold coin");
+                    this.aGui.println ("You can't open the door ! You have to take the 5 gold coin");
                     return;
                 }
             }
         }
 
-        aPlayer.getStackRoom().push (aPlayer.getCurrentRoom());
-        aPlayer.changeRoom(vNextRoom);
+        this.aPlayer.changeRoom(vNextRoom);
         if (aTimer == 0) {
-            aGui.println("!! time is over !!");
-            endGame();
+            this.aGui.println("!! time is over !!");
+            this.endGame();
         }
         else {
-            aTimer -= 1;
-            aGui.println("You have " + aTimer + "moves even");
+            this.aTimer -= 1;
+            this.aGui.println("You have " + this.aTimer + "moves even");
         }
     } //procedure goRoom() 
 
@@ -254,8 +255,8 @@ public class GameEngine
      */
     private void endGame()
     {
-        aGui.println("Thank you for playing.  Good bye.");
-        aGui.enable(false);
+        this.aGui.println("Thank you for playing.  Good bye.");
+        this.aGui.enable(false);
     } //endGame()
 
     //autres fonctions
@@ -270,7 +271,7 @@ public class GameEngine
         boolean vSecondWord = true;
         if(pC.getSecondWord() == null)
         {
-            aGui.println("Quit what ?");
+            this.aGui.println("Quit what ?");
             return vSecondWord =false;
         } else 
         {return vSecondWord;
@@ -296,4 +297,4 @@ public class GameEngine
             this.aGui.println ("Erreur : " + pErr.getMessage() );
         }
     } //test(.)
-}
+} //GameEngine

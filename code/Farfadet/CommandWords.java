@@ -36,7 +36,7 @@ public class CommandWords
         // pour chacune des commandes valides (du tableau constant)
         for ( int i=0; i<sValidCommands.length; i++ ) {
             // si elle est egale a pString
-            if ( sValidCommands[i].equals( pString ) )
+            if ( this.sValidCommands[i].equals( pString ) )
                 return true;
         } // for
         // si nous arrivons la, c'est que la commande n'a pas ete trouvee dans le tableau

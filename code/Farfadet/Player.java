@@ -99,8 +99,8 @@ public class Player
     public void changeRoom (final Room pRoom){
         this.aCurrentRoom = pRoom;
         this.aGui.println (this.aCurrentRoom.getLongDescription ());
-        if (aCurrentRoom.getImageName() != null)
-            aGui.showImage(aCurrentRoom.getImageName());
+        if (this.aCurrentRoom.getImageName() != null)
+            this.aGui.showImage(aCurrentRoom.getImageName());
     } //changeRoom(.)
 
     /**
@@ -112,9 +112,9 @@ public class Player
         String vDescr = pCommand.getSecondWord();
         Item vItem = this.aCurrentRoom.aItemHM.get(vDescr);
         if (vItem == null) 
-            aGui.println ("this object do not exist");
+            this.aGui.println ("this object do not exist");
         else if (this.aPoidsMax < this.aInventory.getTotalWeight() + vItem.getWeight())
-            aGui.println ("your inventory is too heavy");
+            this.aGui.println ("your inventory is too heavy");
         else {
             this.aInventory.addItem(vDescr, vItem);
             this.aCurrentRoom.aItemHM.remove(vDescr, vItem);
@@ -131,9 +131,9 @@ public class Player
         String vDescr = pCommand.getSecondWord();
         Item vItem = this.aInventory.aInventoryHM.get(vDescr);
         if (vItem == null)
-            aGui.println ("can't drop this object");
+            this.aGui.println ("can't drop this object");
         else {
-            aInventory.removeItem(vDescr, vItem);
+            this.aInventory.removeItem(vDescr, vItem);
             this.aCurrentRoom.aItemHM.put(vDescr, vItem);
         }
         this.aGui.println (this.aInventory.getItemsString());
@@ -144,7 +144,7 @@ public class Player
      */
     public void look () 
     {
-        printLocationInfo();
+        this.printLocationInfo();
     } //look()
 
     /**
@@ -156,9 +156,9 @@ public class Player
     {
         Item vItem = this.aInventory.aInventoryHM.get(pCommand);
         if (pCommand.equals("magicCookie") && this.aInventory.aInventoryHM.containsValue(vItem)) {
-            this.aPoidsMax = aPoidsMax*2;
+            this.aPoidsMax = this.aPoidsMax*2;
             this.aGui.println ("You eat the Magic Cookie, you increases inventory'weight");
-            aInventory.removeItem(pCommand, vItem);
+            this.aInventory.removeItem(pCommand, vItem);
         }
         else this.aGui.println ("You can't eat that");
     } //eat(.) 
@@ -173,8 +173,15 @@ public class Player
             if (this.aCurrentRoom.getImageName() != null) 
                 this.aGui.showImage (this.aCurrentRoom.getImageName());
         }else
-            aGui.println ("--> You can't go back");        
+            this.aGui.println ("--> You can't go back");        
     } //back()
+    
+    /**
+     * To clear the Stack if the player go in trap door
+     */
+    public void clearStack() {
+        this.aAntRoom.clear();
+    } //clearStack()
 
     // ## Affichage ##
     /**
@@ -182,7 +189,7 @@ public class Player
      */
     public void printLocationInfo ()
     {
-        aGui.println (this.aCurrentRoom.getLongDescription());
+        this.aGui.println (this.aCurrentRoom.getLongDescription());
     } //printLocationInfo() 
 
     /**
@@ -190,15 +197,15 @@ public class Player
      */
     public void printWelcome ()
     {
-        aGui.println("Welcome to the World of Zuul!");
-        aGui.println("The game name is : Alerte au pied de l'arc en ciel");
-        aGui.println("In a magical forest : you, a farfadet, are called urgently at the foot of the rainbow because gold coin from the cauldron have been stolen !");
-        aGui.println ("Then, you have to cross the forest to try to find the stolen gold coin");
+        this.aGui.println("Welcome to the World of Zuul!");
+        this.aGui.println("The game name is : Alerte au pied de l'arc en ciel");
+        this.aGui.println("In a magical forest : you, a farfadet, are called urgently at the foot of the rainbow because gold coin from the cauldron have been stolen !");
+        this.aGui.println ("Then, you have to cross the forest to try to find the stolen gold coin");
 
-        aGui.println("Type 'help' if you need help.");
-        aGui.println("\n");
+        this.aGui.println("Type 'help' if you need help.");
+        this.aGui.println("\n");
 
-        aGui.println(aCurrentRoom.getLongDescription()); 
-        aGui.showImage(aCurrentRoom.getImageName()); 
+        this.aGui.println(this.aCurrentRoom.getLongDescription()); 
+        this.aGui.showImage(this.aCurrentRoom.getImageName()); 
     } //printWelcome()
-} //Player
+} //Player 

@@ -21,5 +21,5 @@ public class Beamer extends Item
     } //constructeur par défaut
     
     // ## Methodes ##
-    //charge and fire
+   
 } //Beamer 

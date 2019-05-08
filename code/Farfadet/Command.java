@@ -53,7 +53,7 @@ public class Command
      */
     public boolean hasSecondWord ()
     {
-        return (aSecondWord != null);
+        return (this.aSecondWord != null);
     } //hasSecondWord()
 
     /**
@@ -61,6 +61,6 @@ public class Command
      */
     public boolean isUnknown () 
     {
-        return (aCommandWord == null);
+        return (this.aCommandWord == null);
     } //isUnkown()  
 } // Command 

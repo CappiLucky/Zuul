@@ -4,7 +4,7 @@ import java.util.*;
  * Project Zuul
  * Classe for Inventory of player'items
  *
- * @author Manon
+ * @author Manon HERMANN
  * @version v1
  */
 public class ItemList
@@ -43,7 +43,7 @@ public class ItemList
      * @return String liste des items dans la HashMap
      */
     public String getItemsString(){
-        if (aInventoryHM.isEmpty()) {
+        if (this.aInventoryHM.isEmpty()) {
             return "inventory is empty !";
         }
         StringBuilder vList = new StringBuilder("inventory : ");
@@ -73,7 +73,7 @@ public class ItemList
         int vWeight = 0;
         Set <String> keys = this.aInventoryHM.keySet();
         for(String item : keys){
-            vWeight = vWeight + aInventoryHM.get(item).getWeight();
+            vWeight = vWeight + this.aInventoryHM.get(item).getWeight();
         }
         return vWeight;
     } //getTotalWeight()
