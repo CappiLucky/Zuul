@@ -6,22 +6,24 @@ take magicCookie
 eat magicCookie
 look
 take magicBook
+back
+back
 go West
-go North
-go West
-take goldCoin
+take goldCoin1
 go Up
-drop mushrooms
+talk Lutin
 go Down
 go North
-drop magicBook
+talk Elfe
+inventory
 go North
 take water
 go South
+talk Fee
 go South
 go South
-drop water
-go North
+talk Arbre
+back
 go East
-drop goldCoin
 go East
+talk Vezonia

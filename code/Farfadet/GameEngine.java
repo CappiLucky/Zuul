@@ -64,7 +64,7 @@ public class GameEngine
         Item vIFleur = new Item ("flower", "flower, is nothing else", 1);
         Item vMagikCookie = new Item ("magicCookie", "upgrade your storage", 0);
 
-        //declaration des variables Room
+        //declaration des Room
         Room vChaudron = new Room (" at the foot of the rainbow", "images/chaudron_dor2.jpg"); //endroit ou il faut ramener les 5pieces
         Room vClairiere = new Room (" in a great clearing", "images/clairiere2.jpg");
         Room vFee = new Room (" face to face with a little woods fairy", "images/fee2.jpg"); //donne une piece d'or 2
@@ -98,7 +98,7 @@ public class GameEngine
         vLivre.setExits ("West", vArbre);
         vSorciere.setExits ("West", vChaudron);
 
-        //creation des TrapDoor et LockDoor
+        //declaration des TrapDoor et LockDoor
         Door vSecretDoor = new Door (false, true, true);
         Door vFCdoor = new Door (true, false, false);
         Door vCFdoor = new Door (true, false, true);
@@ -115,6 +115,19 @@ public class GameEngine
         vLivre.addItem ("magicBook", vILivre);
         vLivre.addItem ("flower", vIFleur);
         vLivre.addItem ("magicCookie", vMagikCookie);
+        
+        //declaration des persos
+        Character vPFee = new Character ("Fee", vFee, vIPiece2);
+        Character vPElfe = new Character ("Elfe", vElfe, vIPiece3);
+        Character vPLutin = new Character ("Lutin", vLutin, vIPiece4);
+        Character vPArbre = new Character ("Arbre", vArbre, vIPiece5);
+        Character vPSorciere = new Character ("Vezonia", vSorciere, vIClef);
+        //ajout des persos dans les rooms
+        vFee.setPNG ("Fee", vPFee);
+        vElfe.setPNG ("Elfe", vPElfe);
+        vLutin.setPNG ("Lutin", vPLutin);
+        vArbre.setPNG ("Arbre", vPArbre);
+        vSorciere.setPNG ("Vezonia", vPSorciere);
 
         //initialiser le lieu de depart
         this.aPlayer = new Player ("Farfadet", vChaudron);
@@ -181,6 +194,12 @@ public class GameEngine
             this.aPlayer.dropItem(command);  
         else if (commandWord.equals("inventory"))
             this.aGui.println (this.aPlayer.getInventory().inventory());
+        else if (commandWord.equals("talk")) {
+            if (!command.hasSecondWord()) 
+                this.aGui.println ("Talk with who ? \n");
+            else 
+                this.aPlayer.talk(command);
+        }
     }
 
     /**
@@ -229,7 +248,7 @@ public class GameEngine
                 this.aPlayer.clearStack();
             } else if (this.aPlayer.getCurrentRoom().getDoor(vDirection).isLockDoor()) {
                 HashMap vInvtHM = this.aPlayer.getInventory().aInventoryHM;
-                if (vInvtHM.containsKey("goldCoin1") && vInvtHM.containsKey("goldCoin") && vInvtHM.containsKey("goldCoin3") && vInvtHM.containsKey("goldCoin4") && vInvtHM.containsKey("goldCoin5")) {
+                if (vInvtHM.containsKey("goldCoin1") && vInvtHM.containsKey("goldCoin2") && vInvtHM.containsKey("goldCoin3") && vInvtHM.containsKey("goldCoin4") && vInvtHM.containsKey("goldCoin5")) {
                     vNextDoor.setLock(false);
                     this.aGui.println ("Amazing ! You found a secret room...");
                 } else {

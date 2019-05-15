@@ -1,23 +1,17 @@
 look
-go East
-look
-go West
-go West
-look
-go South
-lool
-go East
-look
 go West
 go North
+back
+take mushrooms
+go South
+talk Arbre
+go East
+take magicCookie
+eat magicCookie
+back
+back
 go West
-look
+inventory
 go Up
-lool
 go Down
-go North
-look
-go North
-look
-go South
-look
+help

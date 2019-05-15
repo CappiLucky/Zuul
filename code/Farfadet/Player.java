@@ -17,6 +17,8 @@ public class Player
     private UserInterface aGui; 
     public Stack <Room> aAntRoom; //pile des room precedentes
 
+    private boolean aDPfee;
+
     /**
      * Construtor of the player
      * 
@@ -28,6 +30,7 @@ public class Player
         this.aCurrentRoom = pCurrentRoom;
         this.aAntRoom = new Stack <Room> ();
         this.aInventory = new ItemList ();
+        this.aDPfee = false;
     } //constructeur par defaut de player
 
     // ## Accesseurs ##
@@ -175,7 +178,65 @@ public class Player
         }else
             this.aGui.println ("--> You can't go back");        
     } //back()
-    
+
+    /**
+     * @param pCommand command tapper par le joueur
+     */
+    public void talk (final Command pCommand) {
+        String vDescr = pCommand.getSecondWord();
+        Character vPNG = this.aCurrentRoom.aPngHM.get(vDescr);
+        if (vPNG == null)  {
+            this.aGui.println ("this character do not exist");
+            return;
+        }
+        if (vPNG == this.aCurrentRoom.getPNG("Fee")) {
+            if (! aDPfee) {
+                this.aGui.println ("Hello, I found a goldcoin here... Maybe you want this !");
+                this.aInventory.addItem ("goldCoin2", vPNG.getItem());
+                this.aDPfee = true;
+            } else this.aGui.println("I already give you the goldcoin...");
+            return; 
+        } //fee
+        if (vPNG == this.aCurrentRoom.getPNG("Elfe")) {
+            if (! this.aInventory.aInventoryHM.containsKey("magicBook")) {
+                this.aGui.println ("Hi... I lost my magic book, if you have this object I give you a goldcoin");
+                return;
+            } else {
+                this.aGui.println ("Thanks for the magic book, I give you a goldcoin");
+                this.aInventory.addItem ("goldCoin3", vPNG.getItem());
+                this.aInventory.removeItem ("magicBook", this.aInventory.getItem("magicBook"));
+            }
+        }//elfe
+        if (vPNG == this.aCurrentRoom.getPNG("Lutin")) {
+            if (! this.aInventory.aInventoryHM.containsKey("mushrooms")){
+                this.aGui.println ("Give me mushrooms !");
+                return;
+            } else {
+                this.aGui.println ("Great ! Take it, a goldcoin");
+                this.aInventory.addItem ("goldCoin4", vPNG.getItem());
+                this.aInventory.removeItem ("mushrooms", this.aInventory.getItem("mushrooms"));
+            }
+        } //lutin
+        if (vPNG == this.aCurrentRoom.getPNG("Arbre")) {
+            if (! this.aInventory.aInventoryHM.containsKey("water")){
+                this.aGui.println ("OHHH please give me some fresh water");
+                return;
+            } else {
+                this.aGui.println ("Thanks you very much, I'm good now ! Take this glodcoin in thanking");
+                this.aInventory.addItem ("goldCoin5", vPNG.getItem());
+                this.aInventory.removeItem ("water", this.aInventory.getItem("water"));
+            }
+        } //arbre
+        if (vPNG == this.aCurrentRoom.getPNG("Vezonia")) {
+            this.aGui.println ("You found the 5 gold coin ! Congratulation, so I give you the key for the claudron");
+            this.aGui.println ("\n In reality it was a test. you are named chief of the farfadet !");
+            this.aInventory.addItem ("key", vPNG.getItem());
+            //fin du jeu
+            this.aGui.println("Thank you for playing.  Good bye.");
+            this.aGui.enable(false);
+        }
+    } //talk(.)
+
     /**
      * To clear the Stack if the player go in trap door
      */

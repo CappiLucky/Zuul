@@ -134,6 +134,7 @@ public class UserInterface implements ActionListener
             public void windowClosing(WindowEvent e) { System.exit(0); }
         } );
 
+        // ajout d'action listenner pour savoir si on a cliquer sur le bouton
         this.aEntryField.addActionListener( this );
         this.aButtonHelp.addActionListener (this);
         this.aButtonLook.addActionListener (this);

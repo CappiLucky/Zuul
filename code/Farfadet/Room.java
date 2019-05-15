@@ -14,6 +14,7 @@ public class Room
     public HashMap <String, Room> aExitHM; //HashMap reliant les room et leur sortie
     public HashMap <String, Item> aItemHM; //HashMap reliant les room et leur item
     public HashMap <String, Door> aDoorHM; 
+    public HashMap <String, Character> aPngHM;
     private String aDescription; 
     private String aImageName;
 
@@ -31,6 +32,7 @@ public class Room
         this.aExitHM = new HashMap <String, Room> ();
         this.aItemHM = new HashMap <String, Item> ();
         this.aDoorHM = new HashMap <String, Door> ();
+        this.aPngHM = new HashMap <String, Character> ();
         this.aImageName = pImage;
     } //Room(..)
 
@@ -44,23 +46,6 @@ public class Room
         return this.aDescription;
     } //getDescription()
 
-    /**
-     * Return a long description of this room, of the form :
-     *      You are in the kitchen.
-     *      Exits : North West
-     *      
-     * @return A description of the room, including exits     
-     */
-    public String getLongDescription()
-    { 
-        if (this.aItemHM.isEmpty()) {
-            return ("\n" + "You are " + this.aDescription + ".\n" + this.getExitString());
-        } else {
-            return ("\n" + "You are " + this.aDescription + ".\n" 
-                + this.getItemString() + ".\n" 
-                + this.getExitString() );
-        }
-    } //getLongDescription()
 
     /**
      * Define the exits of the room.
@@ -139,6 +124,36 @@ public class Room
         return this.aDoorHM.get(pDir);
     } //getDoord(.)
     
+    /**
+     * @param pName nom du perso
+     * @param pPNG character
+     */
+    public void setPNG (final String pName, final Character pPNG) {
+        this.aPngHM.put(pName, pPNG);
+    } //setPNG(..)
+    
+    /**
+     * @return String of the different PNG
+     */
+    public String getPNGString() 
+    {
+        String vPNG = "Character : ";
+        Set<String> keys = this.aPngHM.keySet();
+        for (String aPngHM : keys ) 
+        {
+            vPNG += ' ' + aPngHM; 
+        }
+        return vPNG; 
+    } //getPNG()
+    
+    /**
+     * @return Character
+     * @param pName name of the pnj
+     */
+    public Character getPNG (final String pName) {
+        return this.aPngHM.get(pName);
+    }
+    
     // ## Methodes ##
     /**
      * @param pName name of the item
@@ -154,4 +169,20 @@ public class Room
     public void removeItem (final String pName) {
         this.aItemHM.remove(pName);
     } //removeItem(..)
+    
+    /**
+     * Return a long description of this room, of the form :
+     *      You are in the kitchen.
+     *      Exits : North West
+     *      
+     * @return A description of the room, including exits     
+     */
+    public String getLongDescription()
+    { 
+        String vS = " You are " + this.aDescription;
+        vS += "\n " + this.getExitString();
+        vS += "\n " + this.getItemString();
+        vS += "\n " + this.getPNGString();
+        return vS;
+    } //getLongDescription()
 }// Room

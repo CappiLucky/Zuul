@@ -20,6 +20,4 @@ public class Beamer extends Item
         super(pName, pDesc, pPoids);
     } //constructeur par défaut
     
-    // ## Methodes ##
-   
 } //Beamer 
